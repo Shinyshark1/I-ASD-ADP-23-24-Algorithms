@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>Program.DemoBenchmark-20231107-201337</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.13.10, Windows 11 (10.0.22621.2428/22H2/2022Update/SunValley2)
+AMD Ryzen 9 5900X, 1 CPU, 24 logical and 12 physical cores
+.NET SDK 7.0.302
+  [Host]     : .NET 7.0.5 (7.0.523.17405), X64 RyuJIT AVX2
+  DefaultJob : .NET 7.0.5 (7.0.523.17405), X64 RyuJIT AVX2
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Median</th>
+</tr>
+</thead><tbody><tr><td>TestAdd</td><td>0.0349 ns</td><td>0.0217 ns</td><td>0.0233 ns</td><td>0.0382 ns</td>
+</tr><tr><td>TestMinus</td><td>0.0053 ns</td><td>0.0071 ns</td><td>0.0066 ns</td><td>0.0013 ns</td>
+</tr><tr><td>TestMultiply</td><td>0.0146 ns</td><td>0.0161 ns</td><td>0.0220 ns</td><td>0.0012 ns</td>
+</tr><tr><td>TestDivide</td><td>0.0000 ns</td><td>0.0000 ns</td><td>0.0000 ns</td><td>0.0000 ns</td>
+</tr></tbody></table>
+</body>
+</html>
