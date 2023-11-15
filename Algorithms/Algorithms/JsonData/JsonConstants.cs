@@ -28,7 +28,6 @@ namespace Algorithms.JsonData
         {
             using (WebClient wc = new WebClient())
             {
-                Console.WriteLine("Test");
                 return wc.DownloadString("https://han-aim.gitlab.io/dt-sd-asd/materials/ADP/bron/dataset_hashing.json");
             }
         }

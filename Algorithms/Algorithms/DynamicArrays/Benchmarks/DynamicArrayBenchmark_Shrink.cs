@@ -8,32 +8,34 @@ namespace Algorithms.DynamicArrays.Benchmarks
     [MemoryDiagnoser]
     public class DynamicArrayBenchmark_Shrink
     {
-        private DynamicArray<int> PopulateData()
+        public DynamicArray<int> PopulateData()
         {
             var sortingJson = JsonConstants.ReadDataSetSorting();
             return new DynamicArray<int>(JsonConvert.DeserializeObject<LijstHerhaald1000>(sortingJson).Content);
         }
 
         [Benchmark(Baseline = true)]
-        public void HalfWhenPossible()
+        public int HalfWhenPossible()
         {
             var data = PopulateData();
             for (int i = 0; i < data.Count; i++)
             {
-                Console.WriteLine($"Removing {i}/{data.Count}");
                 data.Remove(data[^1]);
             }
+
+            return data.Count;
         }
 
         [Benchmark]
-        public void ShrinkEachTime()
+        public int ShrinkEachTime()
         {
             var data = PopulateData();
             for (int i = 0; i < data.Count; i++)
             {
-                Console.WriteLine($"Removing {i}/{data.Count}");
                 data.Remove_WithShrinkByOne(data[^1]);
             }
+
+            return data.Count;
         }
     }
 }
