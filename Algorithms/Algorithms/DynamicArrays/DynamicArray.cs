@@ -38,21 +38,14 @@
 
         public int Count => _innerCount;
 
-        //TODO: Create a "Grow Array" method.
         public void Add(T item)
         {
-            if (_innerArray.Length >= _innerCount)
-            {
-                var temporaryArray = new T[(_innerCount * 2)];
-                Array.Copy(_innerArray, temporaryArray, _innerArray.Length);
-                _innerArray = temporaryArray;
-            }
+            DoubleArrayIfRequired();
 
             _innerArray[_innerCount] = item;
             _innerCount++;
         }
 
-        //TODO: Create a "Grow Array" method.
         public void Insert(int index, T item)
         {
             if (index < 0)
@@ -60,6 +53,7 @@
                 throw new ArgumentOutOfRangeException("Items may not be inserted on a negative index.");
             }
 
+            DoubleArrayIfRequired();
             if (index > _innerCount)
             {
                 Add(item);
@@ -69,7 +63,6 @@
             _innerArray = InsertIntoArray(index, item);
         }
 
-        //TODO: Create a "Grow Array" method.
         private T[] InsertIntoArray(int index, T item)
         {
             var temporaryArray = new T[_innerArray.Length + 1];
@@ -89,7 +82,6 @@
             return temporaryArray;
         }
 
-        //TODO: Create a "Remove Array" method.
         public bool Remove(T item)
         {
             List<int> indexesToRemove = GetIndexesToRemove(item);
@@ -100,10 +92,26 @@
 
             _innerArray = DefragmentArray(indexesToRemove);
             _innerCount -= indexesToRemove.Count;
+
+            HalfArrayIfPossible();
             return true;
         }
 
-        //TODO: Create a "Remove Array" method.
+        public bool Remove_WithShrinkByOne(T item)
+        {
+            List<int> indexesToRemove = GetIndexesToRemove(item);
+            if (indexesToRemove.Count == 0)
+            {
+                return false;
+            }
+
+            _innerArray = DefragmentArray(indexesToRemove);
+            _innerCount -= indexesToRemove.Count;
+
+            ShrinkArrayIfPossible();
+            return true;
+        }
+
         private List<int> GetIndexesToRemove(T item)
         {
             var indexesToRemove = new List<int>();
@@ -136,7 +144,6 @@
             return temporaryArray;
         }
 
-        //TODO: Create a "Remove Array" method.
         public bool RemoveAtIndex(int index)
         {
             if (index < 0)
@@ -151,7 +158,57 @@
 
             _innerArray = DefragmentArray(new List<int> { index });
             _innerCount--;
+
+            HalfArrayIfPossible();
             return true;
+        }
+
+        public void DoubleArrayIfRequired()
+        {
+            if (_innerCount < _innerArray.Length)
+            {
+                return;
+            }
+
+            var temporaryArray = new T[(_innerCount * 2)];
+            Array.Copy(_innerArray, temporaryArray, _innerArray.Length);
+            _innerArray = temporaryArray;
+        }
+
+        public void ExpandArrayByOneIfRequired()
+        {
+            if (_innerArray.Length < _innerCount)
+            {
+                return;
+            }
+
+            var temporaryArray = new T[(_innerCount + 1)];
+            Array.Copy(_innerArray, temporaryArray, _innerArray.Length);
+            _innerArray = temporaryArray;
+        }
+
+        public void HalfArrayIfPossible()
+        {
+            if (_innerCount > (_innerArray.Length / 2))
+            {
+                return;
+            }
+
+            var temporaryArray = new T[(_innerCount)];
+            Array.Copy(_innerArray, temporaryArray, temporaryArray.Length);
+            _innerArray = temporaryArray;
+        }
+
+        public void ShrinkArrayIfPossible()
+        {
+            if (_innerCount >= _innerArray.Length)
+            {
+                return;
+            }
+
+            var temporaryArray = new T[(_innerCount)];
+            Array.Copy(_innerArray, temporaryArray, temporaryArray.Length);
+            _innerArray = temporaryArray;
         }
 
         public void Clear()

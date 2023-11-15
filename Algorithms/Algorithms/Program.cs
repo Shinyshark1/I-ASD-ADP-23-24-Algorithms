@@ -1,6 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using Algorithms.DynamicArrays;
+using Algorithms.DynamicArrays.Benchmarks;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
 
@@ -8,9 +8,8 @@ public class Program
 {
     private static void Main(string[] args)
     {
-        var summary = BenchmarkRunner.Run<DynamicArrayBenchmarks>();
+        var summary = BenchmarkRunner.Run<DynamicArrayBenchmark_Shrink>();
 
-        //var sortingJson = JsonConstants.ReadDataSetSorting();
 
         //var result1 = new DynamicArray<int>(JsonConvert.DeserializeObject<LijstAflopend2>(sortingJson).Content);
         //var result2 = new DynamicArray<int>(JsonConvert.DeserializeObject<LijstOplopend2>(sortingJson).Content);

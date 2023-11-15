@@ -9,6 +9,8 @@
       "Algorithms.Tests/1.0.0": {
         "dependencies": {
           "Algorithms": "1.0.0",
+          "BenchmarkDotNet": "0.13.10",
+          "BenchmarkDotNet.Annotations": "0.13.10",
           "Microsoft.NET.Test.Sdk": "17.5.0",
           "coverlet.collector": "3.2.0",
           "xunit": "2.4.2",
@@ -1445,7 +1447,8 @@
       "Algorithms/1.0.0": {
         "dependencies": {
           "BenchmarkDotNet": "0.13.10",
-          "BenchmarkDotNet.Annotations": "0.13.10"
+          "BenchmarkDotNet.Annotations": "0.13.10",
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "Algorithms.dll": {}

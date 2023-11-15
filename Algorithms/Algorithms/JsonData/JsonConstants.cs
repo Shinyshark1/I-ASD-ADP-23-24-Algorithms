@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Net;
 
 namespace Algorithms.JsonData
 {
@@ -13,9 +14,10 @@ namespace Algorithms.JsonData
         /// <returns>The 'dataset_sorteren' contents as a string to use for <see cref="JsonConvert.DeserializeObject(string)"/>.</returns>
         public static string ReadDataSetSorting()
         {
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            string jsonFilePath = Path.Combine(baseDir, @"..\..\..\JsonData\Sorteren\dataset_sorteren.json");
-            return File.ReadAllText(jsonFilePath);
+            using (WebClient wc = new WebClient())
+            {
+                return wc.DownloadString("https://han-aim.gitlab.io/dt-sd-asd/materials/ADP/bron/dataset_sorteren.json");
+            }
         }
 
         /// <summary>
@@ -24,9 +26,10 @@ namespace Algorithms.JsonData
         /// <returns>The 'dataset_hashing' contents as a string to use for <see cref="JsonConvert.DeserializeObject(string)"/>.</returns>
         public static string ReadDataSetHashing()
         {
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            string jsonFilePath = Path.Combine(baseDir, @"..\..\..\JsonData\Hashing\dataset_hashing.json");
-            return File.ReadAllText(jsonFilePath);
+            using (WebClient wc = new WebClient())
+            {
+                return wc.DownloadString("https://han-aim.gitlab.io/dt-sd-asd/materials/ADP/bron/dataset_hashing.json");
+            }
         }
 
         /// <summary>
@@ -35,9 +38,10 @@ namespace Algorithms.JsonData
         /// <returns>The 'dataset_grafen' contents as a string to use for <see cref="JsonConvert.DeserializeObject(string)"/>.</returns>
         public static string ReadDataSetGraphing()
         {
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            string jsonFilePath = Path.Combine(baseDir, @"..\..\..\JsonData\Grafen\dataset_grafen.json");
-            return File.ReadAllText(jsonFilePath);
+            using (WebClient wc = new WebClient())
+            {
+                return wc.DownloadString("https://han-aim.gitlab.io/dt-sd-asd/materials/ADP/bron/dataset_grafen.json");
+            }
         }
     }
 }
