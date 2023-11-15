@@ -1,30 +1,31 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using Algorithms.JsonData;
-using Algorithms.JsonData.Sorteren.Models;
+using Algorithms.DynamicArrays;
 using BenchmarkDotNet.Attributes;
-using Newtonsoft.Json;
+using BenchmarkDotNet.Running;
 
 public class Program
 {
     private static void Main(string[] args)
     {
-        var sortingJson = JsonConstants.ReadDataSetSorting();
+        var summary = BenchmarkRunner.Run<DynamicArrayBenchmarks>();
 
-        var result1 = JsonConvert.DeserializeObject<LijstAflopend2>(sortingJson);
-        var result2 = JsonConvert.DeserializeObject<LijstOplopend2>(sortingJson);
-        var result3 = JsonConvert.DeserializeObject<LijstFloat8001>(sortingJson);
-        var result4 = JsonConvert.DeserializeObject<LijstGesorteerdAflopend3>(sortingJson);
-        var result5 = JsonConvert.DeserializeObject<LijstGesorteerdOplopend3>(sortingJson);
-        var result6 = JsonConvert.DeserializeObject<LijstHerhaald1000>(sortingJson);
-        var result7 = JsonConvert.DeserializeObject<LijstLeeg0>(sortingJson);
-        var result8 = JsonConvert.DeserializeObject<LijstNull1>(sortingJson);
-        var result9 = JsonConvert.DeserializeObject<LijstNull3>(sortingJson);
-        var result10 = JsonConvert.DeserializeObject<LijstOplopend10000>(sortingJson);
-        var result11 = JsonConvert.DeserializeObject<LijstWillekeurig10000>(sortingJson);
-        var result12 = JsonConvert.DeserializeObject<LijstWillekeurig3>(sortingJson);
+        //var sortingJson = JsonConstants.ReadDataSetSorting();
 
-        Console.WriteLine("lol");
+        //var result1 = new DynamicArray<int>(JsonConvert.DeserializeObject<LijstAflopend2>(sortingJson).Content);
+        //var result2 = new DynamicArray<int>(JsonConvert.DeserializeObject<LijstOplopend2>(sortingJson).Content);
+        //var result3 = new DynamicArray<double>(JsonConvert.DeserializeObject<LijstFloat8001>(sortingJson).Content);
+        //var result4 = new DynamicArray<int>(JsonConvert.DeserializeObject<LijstGesorteerdAflopend3>(sortingJson).Content);
+        //var result5 = new DynamicArray<int>(JsonConvert.DeserializeObject<LijstGesorteerdOplopend3>(sortingJson).Content);
+        //var result6 = new DynamicArray<int>(JsonConvert.DeserializeObject<LijstHerhaald1000>(sortingJson).Content);
+        //var result7 = new DynamicArray<object>(JsonConvert.DeserializeObject<LijstLeeg0>(sortingJson).Content);
+        //var result8 = new DynamicArray<object>(JsonConvert.DeserializeObject<LijstNull1>(sortingJson).Content);
+        //var result9 = new DynamicArray<int?>(JsonConvert.DeserializeObject<LijstNull3>(sortingJson).Content);
+        //var result10 = new DynamicArray<int>(JsonConvert.DeserializeObject<LijstOplopend10000>(sortingJson).Content);
+        //var result11 = new DynamicArray<int>(JsonConvert.DeserializeObject<LijstWillekeurig10000>(sortingJson).Content);
+        //var result12 = new DynamicArray<int>(JsonConvert.DeserializeObject<LijstWillekeurig3>(sortingJson).Content);
+
+        //Console.WriteLine("Test");
     }
 
     public class DemoBenchmark

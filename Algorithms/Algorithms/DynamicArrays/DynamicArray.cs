@@ -38,6 +38,7 @@
 
         public int Count => _innerCount;
 
+        //TODO: Create a "Grow Array" method.
         public void Add(T item)
         {
             if (_innerArray.Length >= _innerCount)
@@ -51,6 +52,7 @@
             _innerCount++;
         }
 
+        //TODO: Create a "Grow Array" method.
         public void Insert(int index, T item)
         {
             if (index < 0)
@@ -67,6 +69,7 @@
             _innerArray = InsertIntoArray(index, item);
         }
 
+        //TODO: Create a "Grow Array" method.
         private T[] InsertIntoArray(int index, T item)
         {
             var temporaryArray = new T[_innerArray.Length + 1];
@@ -86,6 +89,7 @@
             return temporaryArray;
         }
 
+        //TODO: Create a "Remove Array" method.
         public bool Remove(T item)
         {
             List<int> indexesToRemove = GetIndexesToRemove(item);
@@ -99,6 +103,7 @@
             return true;
         }
 
+        //TODO: Create a "Remove Array" method.
         private List<int> GetIndexesToRemove(T item)
         {
             var indexesToRemove = new List<int>();
@@ -131,6 +136,7 @@
             return temporaryArray;
         }
 
+        //TODO: Create a "Remove Array" method.
         public bool RemoveAtIndex(int index)
         {
             if (index < 0)

@@ -2,6 +2,13 @@
 
 namespace Algorithms.Tests;
 
+/// <summary>
+/// You are meant to feed in the data here and see how long it will take.
+/// Your unit tests are more a measure of performance rather than a test of functionality.
+/// 
+/// You need to be able to reason about the operations. Understand the impact of your change. Know what is happening.
+/// Calculate the times for alternatives. You should have 1-2 tests per method(?) or implementation(?).
+/// </summary>
 public class DynamicArrayTests
 {
     [Fact]
