@@ -11,6 +11,6 @@
         
         public bool Contains(T item);
 
-        public int IndexOf(T item);
+        public int? IndexOf(T item);
     }
 }
