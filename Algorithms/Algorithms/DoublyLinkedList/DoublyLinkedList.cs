@@ -13,27 +13,27 @@
             }
         }
 
-        public T this[int index] 
+        public T this[int index]
         {
             get => Get(index).Value;
-            set => Get(index).Value = value; 
+            set => Get(index).Value = value;
         }
 
         private Node<T> Get(int index)
         {
             // We start on the [0]th node.
             var node = Head.NextNode;
-            
+
             for (int i = 0; i <= index; i++)
             {
                 // We should always check if the next node would be null, as it indicates that we have reached the tail.
-                if(node.NextNode == null)
+                if (node.NextNode == null)
                 {
                     throw new IndexOutOfRangeException();
                 }
 
                 // If the iteration is equal to the index that is being asked for, we retrieve the value.
-                if(i == index)
+                if (i == index)
                 {
                     return node;
                 }
@@ -62,7 +62,21 @@
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            var node = Head.NextNode;
+            while (true)
+            {
+                if (node?.NextNode == null)
+                {
+                    return false;
+                }
+
+                if (node.Value.Equals(item))
+                {
+                    return true;
+                }
+
+                node = node.NextNode;
+            }
         }
 
         public int? IndexOf(T item)
@@ -72,7 +86,7 @@
             while (true)
             {
                 // If our next node is null, we are on the tail.
-                if(node?.NextNode == null)
+                if (node?.NextNode == null)
                 {
                     return null;
                 }
@@ -114,7 +128,7 @@
                 }
 
                 node = nextNode;
-            }   
+            }
         }
 
         /// <summary>
@@ -130,14 +144,14 @@
             }
 
             Remove(convertedIndex);
-            Remove(item);
+            Remove_WithRecursion(item);
         }
 
         private void RemoveNode(Node<T> node)
         {
             // if we are head node, and the next node of the node being removes is the tail, we do not set it.
             // If this happens, we have removed the last item from our DoublyLinkedList.
-            if(node.PreviousNode.PreviousNode == null && node.NextNode.NextNode == null)
+            if (node.PreviousNode.PreviousNode == null && node.NextNode.NextNode == null)
             {
                 node.PreviousNode.NextNode = null;
                 node.NextNode.PreviousNode = null;

@@ -28,7 +28,7 @@ namespace Algorithms.Tests
         {
             // Arrange
             string[] data = new string[] { "apple", "banana", "cherry" };
-            
+
             // Act
             var linkedList = new DoublyLinkedList<string>(data);
 
@@ -118,6 +118,22 @@ namespace Algorithms.Tests
 
             // This should throw an IndexOutOfRangeException as the last index is 2.
             Assert.Throws<IndexOutOfRangeException>(() => linkedList[3]);
+        }
+
+        [Fact]
+        public void Contains_Finds_TheItem()
+        {
+            // Arrange
+            string[] data = new string[] { "apple", "banana", "cherry" };
+
+            // Act
+            var linkedList = new DoublyLinkedList<string>(data);
+            var foundResult = linkedList.Contains("apple");
+            var notFoundResult = linkedList.Contains("chocolate");
+
+            // Assert
+            Assert.True(foundResult);
+            Assert.False(notFoundResult);
         }
     }
 }

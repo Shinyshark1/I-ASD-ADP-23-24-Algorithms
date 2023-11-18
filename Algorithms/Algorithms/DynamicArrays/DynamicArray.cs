@@ -177,26 +177,24 @@
 
         public void ExpandArrayByOneIfRequired()
         {
-            if (_innerArray.Length < _innerCount)
+            // If there are any empty spots in the array, we shall unset them immediately.
+            if (_innerCount < _innerArray.Length)
             {
-                return;
+                var temporaryArray = new T[(_innerCount)];
+                Array.Copy(_innerArray, temporaryArray, temporaryArray.Length);
+                _innerArray = temporaryArray;
             }
-
-            var temporaryArray = new T[(_innerCount + 1)];
-            Array.Copy(_innerArray, temporaryArray, _innerArray.Length);
-            _innerArray = temporaryArray;
         }
 
         public void HalfArrayIfPossible()
         {
-            if (_innerCount > (_innerArray.Length / 2))
+            // If the actual items in the array are half of the size of the array, we remove the extra sizes in the array.
+            if (_innerCount <= (_innerArray.Length / 2))
             {
-                return;
+                var temporaryArray = new T[(_innerCount)];
+                Array.Copy(_innerArray, temporaryArray, temporaryArray.Length);
+                _innerArray = temporaryArray;
             }
-
-            var temporaryArray = new T[(_innerCount)];
-            Array.Copy(_innerArray, temporaryArray, temporaryArray.Length);
-            _innerArray = temporaryArray;
         }
 
         public void ShrinkArrayIfPossible()
