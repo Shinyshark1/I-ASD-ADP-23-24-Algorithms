@@ -7,17 +7,27 @@ public class Program
 {
     private static void Main(string[] args)
     {
-        //TODO: Figure out why shrinking is faster than halving, which makes no sense.
-        //Run_DynamicArrayBenchmarks();
+        Run_DynamicArrayBenchmarks();
 
-        Run_DoublyLinkedListBenchmarks();
+        //Run_DoublyLinkedListBenchmarks();
     }
 
     private static void Run_DynamicArrayBenchmarks()
     {
         var benchmarkInstance = new DynamicArrayBenchmarks();
 
-        benchmarkInstance.Shrink_Benchmarks();
+        benchmarkInstance.Shrink_Benchmarks(10);
+        Console.WriteLine();
+        benchmarkInstance.Shrink_Benchmarks(100);
+        Console.WriteLine();
+        benchmarkInstance.Shrink_Benchmarks(1000);
+        Console.WriteLine();
+        benchmarkInstance.Shrink_Benchmarks(10000);
+        Console.WriteLine();
+        benchmarkInstance.Shrink_Benchmarks(100000);
+        Console.WriteLine();
+        benchmarkInstance.Shrink_Benchmarks(200000);
+        Console.WriteLine();
     }
 
     private static void Run_DoublyLinkedListBenchmarks()

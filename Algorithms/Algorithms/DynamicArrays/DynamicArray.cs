@@ -37,6 +37,7 @@
         }
 
         public int Count => _innerCount;
+        public int ArrayLength => _innerArray.Length;
 
         public void Add(T item)
         {
@@ -117,7 +118,7 @@
             var indexesToRemove = new List<int>();
             for (int i = 0; i < _innerArray.Length; i++)
             {
-                if (_innerArray[i].Equals(item))
+                if (_innerArray[i]?.Equals(item) == true)
                 {
                     indexesToRemove.Add(i);
                 }
@@ -193,20 +194,16 @@
             {
                 var temporaryArray = new T[(_innerCount)];
                 Array.Copy(_innerArray, temporaryArray, temporaryArray.Length);
-                _innerArray = temporaryArray;
             }
         }
 
         public void ShrinkArrayIfPossible()
         {
-            if (_innerCount >= _innerArray.Length)
+            if (_innerCount < _innerArray.Length)
             {
-                return;
+                var temporaryArray = new T[(_innerCount)];
+                Array.Copy(_innerArray, temporaryArray, temporaryArray.Length);
             }
-
-            var temporaryArray = new T[(_innerCount)];
-            Array.Copy(_innerArray, temporaryArray, temporaryArray.Length);
-            _innerArray = temporaryArray;
         }
 
         public void Clear()

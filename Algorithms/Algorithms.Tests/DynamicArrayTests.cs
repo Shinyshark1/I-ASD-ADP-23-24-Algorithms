@@ -15,6 +15,47 @@ namespace Algorithms.Tests;
 public class DynamicArrayTests
 {
     [Fact]
+    public void Remove_Halves_WhenPossible()
+    {
+        var dynamicArray = new DynamicArray<int>(JsonConvert.DeserializeObject<LijstOplopend10000>(JsonConstants.ReadDataSetSorting()).Content);
+
+        // We keep track of our previous length as the Remove() method changes it before we need it.
+        int previousLength = dynamicArray.ArrayLength;
+        int amountOfItems = dynamicArray.Count;
+
+        for (int i = 0; i < amountOfItems; i++)
+        {
+            dynamicArray.Remove(dynamicArray[^1]);
+
+            // We halve when possible.
+            if (dynamicArray.Count == previousLength / 2)
+            {
+                Assert.Equal(previousLength / 2, dynamicArray.ArrayLength);
+                previousLength = dynamicArray.ArrayLength;
+            }
+        }
+    }
+
+    [Fact]
+    public void RemoveWithShrink_Shrinks_WhenPossible()
+    {
+        var dynamicArray = new DynamicArray<int>(JsonConvert.DeserializeObject<LijstOplopend10000>(JsonConstants.ReadDataSetSorting()).Content);
+
+        // We keep track of our previous length as the Remove() method changes it before we need it.
+        int previousLength = dynamicArray.ArrayLength;
+        int amountOfItems = dynamicArray.Count;
+
+        for (int i = 0; i < amountOfItems; i++)
+        {
+            dynamicArray.Remove_WithShrinkByOne(dynamicArray[^1]);
+
+            // We always shrink if possible, so we'd go from 10, 9, 8, etc...
+            Assert.Equal(previousLength - 1, dynamicArray.ArrayLength);
+            previousLength = dynamicArray.ArrayLength;
+        }
+    }
+
+    [Fact]
     public void TheDataSets_Fit_InTheDynamicArray()
     {
         var sortingJson = JsonConstants.ReadDataSetSorting();

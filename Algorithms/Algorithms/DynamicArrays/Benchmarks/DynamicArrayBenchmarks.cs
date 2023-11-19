@@ -1,60 +1,38 @@
-﻿using Algorithms.JsonData;
-using Algorithms.JsonData.Sorteren.Models;
-using Algorithms.Shared;
-using BenchmarkDotNet.Attributes;
-using Newtonsoft.Json;
+﻿using Algorithms.Shared;
 using System.Diagnostics;
 
 namespace Algorithms.DynamicArrays.Benchmarks
 {
-    [MemoryDiagnoser]
     public class DynamicArrayBenchmarks
     {
-        public static IEnumerable<DynamicArray<int>> Data => new[]
-        {
-            new DynamicArray<int>(JsonConvert.DeserializeObject<LijstOplopend10000>(JsonConstants.ReadDataSetSorting()).Content)
-        };
-
-        [Benchmark(Baseline = true)]
-        [ArgumentsSource(nameof(Data))]
-        public bool HalfWhenPossible(DynamicArray<int> array)
+        public void HalveWhenPossible(DynamicArray<int> array)
         {
             var count = array.Count;
             for (int i = 0; i < count; i++)
             {
                 array.Remove(array[^1]);
             }
-
-            return false;
         }
 
-        [Benchmark]
-        [ArgumentsSource(nameof(Data))]
-        public bool ShrinkEachTime(DynamicArray<int> array)
+        public void ShrinkEachTime(DynamicArray<int> array)
         {
             var count = array.Count;
             for (int i = 0; i < count; i++)
             {
                 array.Remove_WithShrinkByOne(array[^1]);
             }
-
-            return false;
         }
 
-        /// <summary>
-        /// The idea is that shrinking takes more time than halving, as shrinking would copy the array far more than halving.
-        /// If you have 10.000 items, you halve at 5000 whereas you would shrink 5000 times by the time you reach 5000.
-        /// </summary>
-        public void Shrink_Benchmarks()
+        public void Shrink_Benchmarks(int size)
         {
-            Console.WriteLine("Starting shrink benchmark.");
+            Console.WriteLine($"Starting {size} items benchmark.");
             DynamicArray<int> testData;
             var sw = new Stopwatch();
 
-            testData = new DynamicArray<int>(JsonConvert.DeserializeObject<LijstOplopend10000>(JsonConstants.ReadDataSetSorting()).Content);
+            testData = new DynamicArray<int>(CreateDataSet(size));
 
             sw.Start();
-            HalfWhenPossible(testData);
+            HalveWhenPossible(testData);
             sw.Stop();
 
             var firstResult = sw.Elapsed;
@@ -62,7 +40,7 @@ namespace Algorithms.DynamicArrays.Benchmarks
 
             sw.Reset();
 
-            testData = new DynamicArray<int>(JsonConvert.DeserializeObject<LijstOplopend10000>(JsonConstants.ReadDataSetSorting()).Content);
+            testData = new DynamicArray<int>(CreateDataSet(size));
 
             sw.Start();
             ShrinkEachTime(testData);
@@ -73,6 +51,17 @@ namespace Algorithms.DynamicArrays.Benchmarks
 
             Console.WriteLine($"Ratio #1: {RatioCalculator.CalculateTimeSpanRatio(firstResult, firstResult)}");
             Console.WriteLine($"Ratio #2: {RatioCalculator.CalculateTimeSpanRatio(firstResult, secondResult)}");
+        }
+
+        private int[] CreateDataSet(int size)
+        {
+            int[] data = new int[size];
+            for (int i = 0; i < size; i++)
+            {
+                data[i] = i + 1;
+            }
+
+            return data;
         }
     }
 }
