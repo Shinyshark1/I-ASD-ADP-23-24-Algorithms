@@ -11,7 +11,6 @@
 
         /// <summary>
         /// Adds the item to the <see cref="IDynamicArray{T}"/> at the specified index.
-        /// TODO: Write about how this will throw an OutOfRange exception
         /// </summary>
         public void Insert(int index, T item);
 

@@ -21,28 +21,23 @@
 
         private Node<T> Get(int index)
         {
-            // We start on the [0]th node.
             var node = Head.NextNode;
 
             for (int i = 0; i <= index; i++)
             {
-                // We should always check if the next node would be null, as it indicates that we have reached the tail.
                 if (node.NextNode == null)
                 {
                     throw new IndexOutOfRangeException();
                 }
 
-                // If the iteration is equal to the index that is being asked for, we retrieve the value.
                 if (i == index)
                 {
                     return node;
                 }
 
-                // Otherwise we move to the next node.
                 node = node.NextNode;
             }
 
-            // Indexes start from 0, if someone uses a negative number it is out of bounds as well.
             throw new IndexOutOfRangeException();
         }
 
@@ -50,7 +45,6 @@
         {
             var newNode = new Node<T> { Value = item };
 
-            // Grab the tail node. If the previous doesn't exist, we have a head and a tail.
             var previous = Tail.PreviousNode ?? Head;
 
             previous.NextNode = newNode;
@@ -85,7 +79,6 @@
             var index = 0;
             while (true)
             {
-                // If our next node is null, we are on the tail.
                 if (node?.NextNode == null)
                 {
                     return null;
@@ -109,18 +102,15 @@
 
         public void Remove(T item)
         {
-            // We should loop through the list only once and find our items to remove.
             var node = Head.NextNode;
 
             while (true)
             {
-                // If our next node is null, we are on the tail.
                 if (node?.NextNode == null)
                 {
                     return;
                 }
 
-                // We have to set our next node ahead of time, as it may be removed.
                 var nextNode = node.NextNode;
                 if (node.Value.Equals(item))
                 {
@@ -133,7 +123,7 @@
 
         /// <summary>
         /// In this method, we are lazy and use recursion to just find an index and remove the next item each time.
-        /// THIS IS FOR THE BENCHMARK
+        /// We use this for the benchmark only.
         /// </summary>
         public void Remove_WithRecursion(T item)
         {
@@ -149,8 +139,6 @@
 
         private void RemoveNode(Node<T> node)
         {
-            // if we are head node, and the next node of the node being removes is the tail, we do not set it.
-            // If this happens, we have removed the last item from our DoublyLinkedList.
             if (node.PreviousNode.PreviousNode == null && node.NextNode.NextNode == null)
             {
                 node.PreviousNode.NextNode = null;

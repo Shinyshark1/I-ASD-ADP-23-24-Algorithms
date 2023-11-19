@@ -7,7 +7,7 @@ public class Program
 {
     private static void Main(string[] args)
     {
-        Run_DynamicArrayBenchmarks();
+        //Run_DynamicArrayBenchmarks();
 
         //Run_DoublyLinkedListBenchmarks();
     }

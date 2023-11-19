@@ -178,7 +178,6 @@
 
         public void ExpandArrayByOneIfRequired()
         {
-            // If there are any empty spots in the array, we shall unset them immediately.
             if (_innerCount < _innerArray.Length)
             {
                 var temporaryArray = new T[(_innerCount)];
@@ -189,7 +188,6 @@
 
         public void HalfArrayIfPossible()
         {
-            // If the actual items in the array are half of the size of the array, we remove the extra sizes in the array.
             if (_innerCount <= (_innerArray.Length / 2))
             {
                 var temporaryArray = new T[(_innerCount)];
