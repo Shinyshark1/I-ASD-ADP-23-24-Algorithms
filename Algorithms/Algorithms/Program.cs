@@ -2,6 +2,7 @@
 
 using Algorithms.DoublyLinkedList.Benchmarks;
 using Algorithms.DynamicArrays.Benchmarks;
+using Algorithms.Stack.Benchmarks;
 
 public class Program
 {
@@ -10,6 +11,8 @@ public class Program
         //Run_DynamicArrayBenchmarks();
 
         //Run_DoublyLinkedListBenchmarks();
+
+        Run_StackBenchmarks();
     }
 
     private static void Run_DynamicArrayBenchmarks()
@@ -35,5 +38,48 @@ public class Program
         var benchmarkInstance = new DoublyLinkedListBenchmarks();
 
         benchmarkInstance.Remove_Benchmark();
+    }
+
+    private static void Run_StackBenchmarks()
+    {
+        var benchmarkInstance = new StackBenchmarks();
+
+        benchmarkInstance.Push_Benchmark(10);
+        Console.WriteLine();
+        benchmarkInstance.Push_Benchmark(100);
+        Console.WriteLine();
+        benchmarkInstance.Push_Benchmark(1000);
+        Console.WriteLine();
+        benchmarkInstance.Push_Benchmark(10000);
+        Console.WriteLine();
+        benchmarkInstance.Push_Benchmark(100000);
+        Console.WriteLine();
+        benchmarkInstance.Push_Benchmark(1000000);
+        Console.WriteLine();
+        benchmarkInstance.Push_Benchmark(10000000);
+        Console.WriteLine();
+        benchmarkInstance.Push_Benchmark(100000000);
+        Console.WriteLine();
+        benchmarkInstance.Push_Benchmark(1000000000);
+        Console.WriteLine();
+
+        benchmarkInstance.Pop_Benchmark(10);
+        Console.WriteLine();
+        benchmarkInstance.Pop_Benchmark(100);
+        Console.WriteLine();
+        benchmarkInstance.Pop_Benchmark(1000);
+        Console.WriteLine();
+        benchmarkInstance.Pop_Benchmark(10000);
+        Console.WriteLine();
+        benchmarkInstance.Pop_Benchmark(100000);
+        Console.WriteLine();
+        benchmarkInstance.Pop_Benchmark(1000000);
+        Console.WriteLine();
+        benchmarkInstance.Pop_Benchmark(10000000);
+        Console.WriteLine();
+        benchmarkInstance.Pop_Benchmark(100000000);
+        Console.WriteLine();
+        benchmarkInstance.Pop_Benchmark(1000000000);
+        Console.WriteLine();
     }
 }
