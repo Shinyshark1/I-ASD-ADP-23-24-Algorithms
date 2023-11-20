@@ -29,7 +29,7 @@ namespace Algorithms.DynamicArrays.Benchmarks
             DynamicArray<int> testData;
             var sw = new Stopwatch();
 
-            testData = new DynamicArray<int>(CreateDataSet(size));
+            testData = new DynamicArray<int>(DataSetHelper.CreateDataSet(size));
 
             sw.Start();
             HalveWhenPossible(testData);
@@ -40,7 +40,7 @@ namespace Algorithms.DynamicArrays.Benchmarks
 
             sw.Reset();
 
-            testData = new DynamicArray<int>(CreateDataSet(size));
+            testData = new DynamicArray<int>(DataSetHelper.CreateDataSet(size));
 
             sw.Start();
             ShrinkEachTime(testData);
@@ -51,17 +51,6 @@ namespace Algorithms.DynamicArrays.Benchmarks
 
             Console.WriteLine($"Ratio #1: {RatioCalculator.CalculateTimeSpanRatio(firstResult, firstResult)}");
             Console.WriteLine($"Ratio #2: {RatioCalculator.CalculateTimeSpanRatio(firstResult, secondResult)}");
-        }
-
-        private int[] CreateDataSet(int size)
-        {
-            int[] data = new int[size];
-            for (int i = 0; i < size; i++)
-            {
-                data[i] = i + 1;
-            }
-
-            return data;
         }
     }
 }
