@@ -166,19 +166,17 @@
 
         public void DoubleArrayIfRequired()
         {
-            if (_innerCount < _innerArray.Length)
+            if (_innerCount >= _innerArray.Length)
             {
-                return;
+                var temporaryArray = new T[(_innerCount * 2)];
+                Array.Copy(_innerArray, temporaryArray, _innerArray.Length);
+                _innerArray = temporaryArray;
             }
-
-            var temporaryArray = new T[(_innerCount * 2)];
-            Array.Copy(_innerArray, temporaryArray, _innerArray.Length);
-            _innerArray = temporaryArray;
         }
 
         public void ExpandArrayByOneIfRequired()
         {
-            if (_innerCount < _innerArray.Length)
+            if (_innerCount >= _innerArray.Length)
             {
                 var temporaryArray = new T[(_innerCount)];
                 Array.Copy(_innerArray, temporaryArray, temporaryArray.Length);
@@ -192,6 +190,7 @@
             {
                 var temporaryArray = new T[(_innerCount)];
                 Array.Copy(_innerArray, temporaryArray, temporaryArray.Length);
+                _innerArray = temporaryArray;
             }
         }
 
@@ -201,6 +200,7 @@
             {
                 var temporaryArray = new T[(_innerCount)];
                 Array.Copy(_innerArray, temporaryArray, temporaryArray.Length);
+                _innerArray = temporaryArray;
             }
         }
 
