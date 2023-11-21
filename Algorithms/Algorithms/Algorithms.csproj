@@ -16,7 +16,6 @@
   <ItemGroup>
     <Folder Include="Deque\" />
     <Folder Include="PriorityQueue\" />
-    <Folder Include="DynamicArrays\Benchmarks\Results\" />
   </ItemGroup>
 
 </Project>

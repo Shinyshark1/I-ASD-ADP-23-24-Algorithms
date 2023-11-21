@@ -1,20 +1,17 @@
-﻿using Algorithms.JsonData;
-using Algorithms.JsonData.Sorteren.Models;
-using Algorithms.Shared;
-using Newtonsoft.Json;
+﻿using Algorithms.Shared;
 using System.Diagnostics;
 
 namespace Algorithms.DoublyLinkedList.Benchmarks
 {
     public class DoublyLinkedListBenchmarks
     {
-        public void Remove_Benchmark()
+        public void Remove_Benchmark(int size)
         {
-            Console.WriteLine("Starting benchmark...");
+            Console.WriteLine($"Starting 'Remove {size} items' benchmark.");
             DoublyLinkedList<int> testData;
             var sw = new Stopwatch();
 
-            testData = new DoublyLinkedList<int>(JsonConvert.DeserializeObject<LijstHerhaald1000>(JsonConstants.ReadDataSetSorting()).Content);
+            testData = new DoublyLinkedList<int>(DataSetHelper.CreateDataSet(size));
 
             // First we test the normal remove. This will move through the list once and remove an item as it goes.
             // It will traverse the whole list only once in doing so.
@@ -23,11 +20,11 @@ namespace Algorithms.DoublyLinkedList.Benchmarks
             sw.Stop();
 
             var firstResult = sw.Elapsed;
-            Console.WriteLine($"Normal remove: {firstResult}");
+            Console.WriteLine($"Size: {size} - Elapsed time: {firstResult}");
 
             sw.Restart();
 
-            testData = new DoublyLinkedList<int>(JsonConvert.DeserializeObject<LijstHerhaald1000>(JsonConstants.ReadDataSetSorting()).Content);
+            testData = new DoublyLinkedList<int>(DataSetHelper.CreateDataSet(size));
 
             // This test removes recursively. It is a lazy way that reuses the IndexOf method.
             // Each time an item is found, we just recursively call the remove method.
@@ -37,11 +34,10 @@ namespace Algorithms.DoublyLinkedList.Benchmarks
             sw.Stop();
 
             var secondResult = sw.Elapsed;
-            Console.WriteLine($"Recursive remove: {secondResult}");
+            Console.WriteLine($"Size: {size} - Elapsed time: {secondResult}");
 
-            Console.WriteLine($"Ratio #1: {RatioCalculator.CalculateTimeSpanRatio(firstResult, firstResult)}");
-            Console.WriteLine($"Ratio #2: {RatioCalculator.CalculateTimeSpanRatio(firstResult, secondResult)}");
+            Console.WriteLine($"Removing: {RatioCalculator.CalculateTimeSpanRatio(firstResult, firstResult)}");
+            Console.WriteLine($"Removing with recursion: {RatioCalculator.CalculateTimeSpanRatio(firstResult, secondResult)}");
         }
-
     }
 }

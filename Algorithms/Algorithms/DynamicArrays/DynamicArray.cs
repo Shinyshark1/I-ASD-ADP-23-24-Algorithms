@@ -7,8 +7,8 @@
 
         public DynamicArray()
         {
-            _innerCount = 0;
-            _innerArray = Array.Empty<T>();
+            _innerCount = 1;
+            _innerArray = new T[1];
         }
 
         public DynamicArray(T[] array)

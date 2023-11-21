@@ -8,9 +8,9 @@ public class Program
 {
     private static void Main(string[] args)
     {
-        Run_DynamicArrayBenchmarks();
+        //Run_DynamicArrayBenchmarks();
 
-        //Run_DoublyLinkedListBenchmarks();
+        Run_DoublyLinkedListBenchmarks();
 
         //Run_StackBenchmarks();
     }
@@ -18,6 +18,27 @@ public class Program
     private static void Run_DynamicArrayBenchmarks()
     {
         var benchmarkInstance = new DynamicArrayBenchmarks();
+
+        benchmarkInstance.Add_Benchmark(10);
+        Console.WriteLine();
+        benchmarkInstance.Add_Benchmark(100);
+        Console.WriteLine();
+        benchmarkInstance.Add_Benchmark(1000);
+        Console.WriteLine();
+        benchmarkInstance.Add_Benchmark(10000);
+        Console.WriteLine();
+        benchmarkInstance.Add_Benchmark(100000);
+        Console.WriteLine();
+        benchmarkInstance.Add_Benchmark(200000);
+        Console.WriteLine();
+        benchmarkInstance.Add_Benchmark(500000);
+        Console.WriteLine();
+        benchmarkInstance.Add_Benchmark(1000000);
+        Console.WriteLine();
+        benchmarkInstance.Add_Benchmark(10000000);
+        Console.WriteLine();
+        benchmarkInstance.Add_Benchmark(100000000);
+        Console.WriteLine();
 
         benchmarkInstance.ShrinkAndHalve_Benchmark(10);
         Console.WriteLine();
@@ -37,7 +58,19 @@ public class Program
     {
         var benchmarkInstance = new DoublyLinkedListBenchmarks();
 
-        benchmarkInstance.Remove_Benchmark();
+        benchmarkInstance.Remove_Benchmark(10);
+        Console.WriteLine();
+        benchmarkInstance.Remove_Benchmark(100);
+        Console.WriteLine();
+        benchmarkInstance.Remove_Benchmark(1000);
+        Console.WriteLine();
+        benchmarkInstance.Remove_Benchmark(10000);
+        Console.WriteLine();
+        benchmarkInstance.Remove_Benchmark(100000);
+        Console.WriteLine();
+        benchmarkInstance.Remove_Benchmark(1000000);
+        Console.WriteLine();
+        benchmarkInstance.Remove_Benchmark(10000000);
     }
 
     private static void Run_StackBenchmarks()
