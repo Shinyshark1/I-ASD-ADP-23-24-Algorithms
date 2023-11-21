@@ -8,28 +8,28 @@ public class Program
 {
     private static void Main(string[] args)
     {
-        //Run_DynamicArrayBenchmarks();
+        Run_DynamicArrayBenchmarks();
 
         //Run_DoublyLinkedListBenchmarks();
 
-        Run_StackBenchmarks();
+        //Run_StackBenchmarks();
     }
 
     private static void Run_DynamicArrayBenchmarks()
     {
         var benchmarkInstance = new DynamicArrayBenchmarks();
 
-        benchmarkInstance.Shrink_Benchmarks(10);
+        benchmarkInstance.ShrinkAndHalve_Benchmark(10);
         Console.WriteLine();
-        benchmarkInstance.Shrink_Benchmarks(100);
+        benchmarkInstance.ShrinkAndHalve_Benchmark(100);
         Console.WriteLine();
-        benchmarkInstance.Shrink_Benchmarks(1000);
+        benchmarkInstance.ShrinkAndHalve_Benchmark(1000);
         Console.WriteLine();
-        benchmarkInstance.Shrink_Benchmarks(10000);
+        benchmarkInstance.ShrinkAndHalve_Benchmark(10000);
         Console.WriteLine();
-        benchmarkInstance.Shrink_Benchmarks(100000);
+        benchmarkInstance.ShrinkAndHalve_Benchmark(100000);
         Console.WriteLine();
-        benchmarkInstance.Shrink_Benchmarks(200000);
+        benchmarkInstance.ShrinkAndHalve_Benchmark(200000);
         Console.WriteLine();
     }
 
