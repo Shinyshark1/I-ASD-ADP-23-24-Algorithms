@@ -38,5 +38,18 @@ namespace Algorithms.Stack.Benchmarks
 
             Console.WriteLine($"Size: {size} - Elapsed time: {sw.Elapsed}");
         }
+
+        public void Top_Benchmark(int size)
+        {
+            Console.WriteLine($"Starting top benchmark with {size} items.");
+            Stack<int> stack = new(DataSetHelper.CreateDataSet(size));
+            var sw = new Stopwatch();
+
+            sw.Start();
+            stack.Top();
+            sw.Stop();
+
+            Console.WriteLine($"Size: {size} - Elapsed time: {sw.Elapsed}");
+        }
     }
 }
