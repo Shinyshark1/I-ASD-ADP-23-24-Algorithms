@@ -15,15 +15,14 @@
 
         public T? FindNext()
         {
-            T? priorityItem = default;
-            foreach (T item in _items)
+            if(_items.Count == 0)
             {
-                if (priorityItem == null)
-                {
-                    priorityItem = item;
-                    continue;
-                }
+                return default;
+            }
 
+            T? priorityItem = _items[0];
+            foreach (T item in _items.Skip(1))
+            {
                 if (priorityItem.CompareTo(item) < 0)
                 {
                     priorityItem = item;

@@ -2,6 +2,7 @@
 
 using Algorithms.DoublyLinkedList.Benchmarks;
 using Algorithms.DynamicArrays.Benchmarks;
+using Algorithms.PriorityQueue.Benchmarks;
 using Algorithms.Shared;
 using Algorithms.Stack.Benchmarks;
 
@@ -14,6 +15,8 @@ public class Program
         //Run_DoublyLinkedListBenchmarks();
 
         //Run_StackBenchmarks();
+
+        Run_PriorityQueueBenchmarks();
     }
 
     private static void Run_DynamicArrayBenchmarks()
@@ -78,6 +81,36 @@ public class Program
         foreach (var item in benchmarkValues)
         {
             benchmarkInstance.Top_Benchmark(item);
+            Console.WriteLine();
+        }
+    }
+
+    private static void Run_PriorityQueueBenchmarks()
+    {
+        List<int> benchmarkValues;
+        var benchmarkInstance = new PriorityQueueBenchmarks();
+
+        benchmarkValues = new List<int> { 10, 100, 1000, 10000, 100000, 1000000, 10000000 };
+        BenchmarkHelper.StartBenchmark("Insert");
+        foreach (int value in benchmarkValues)
+        {
+            benchmarkInstance.Insert_Benchmark(value);
+            Console.WriteLine();
+        }
+
+        benchmarkValues = new List<int> { 10, 100, 1000, 10000, 100000, 1000000, 10000000 };
+        BenchmarkHelper.StartBenchmark("FindNext");
+        foreach (int value in benchmarkValues)
+        {
+            benchmarkInstance.FindNext_Benchmark(value);
+            Console.WriteLine();
+        }
+
+        benchmarkValues = new List<int> { 10, 100, 1000, 10000, 100000 };
+        BenchmarkHelper.StartBenchmark("DeleteNext");
+        foreach (int value in benchmarkValues)
+        {
+            benchmarkInstance.DeleteNext_Benchmark(value);
             Console.WriteLine();
         }
     }
