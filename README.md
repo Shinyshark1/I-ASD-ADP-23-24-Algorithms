@@ -15,7 +15,7 @@ The Algorithms.Tests project has unit tests for ease of development via test dri
 Each algorithm or data structure has one unit test at the top that proves that the provided datasets can be read by the algorithm or data structure.
 
 ## Codespaces
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)]([URL](https://codespaces.new/Shinyshark1/I-ASD-ADP-23-24-Algorithms/tree/main?quickstart=1)https://codespaces.new/Shinyshark1/I-ASD-ADP-23-24-Algorithms/tree/main?quickstart=1)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Shinyshark1/I-ASD-ADP-23-24-Algorithms/tree/main?quickstart=1)
 
 ### Running tests
 All tests can be found in Algorithms/Algorithms.Tests
