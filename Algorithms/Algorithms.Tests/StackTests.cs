@@ -18,8 +18,8 @@ namespace Algorithms.Tests
             var result4 = Record.Exception(() => new CustomStack.Stack<int>(JsonConvert.DeserializeObject<LijstGesorteerdAflopend3>(sortingJson).Content));
             var result5 = Record.Exception(() => new CustomStack.Stack<int>(JsonConvert.DeserializeObject<LijstGesorteerdOplopend3>(sortingJson).Content));
             var result6 = Record.Exception(() => new CustomStack.Stack<int>(JsonConvert.DeserializeObject<LijstHerhaald1000>(sortingJson).Content));
-            var result7 = Record.Exception(() => new CustomStack.Stack<object>(JsonConvert.DeserializeObject<LijstLeeg0>(sortingJson).Content));
-            var result8 = Record.Exception(() => new CustomStack.Stack<object>(JsonConvert.DeserializeObject<LijstNull1>(sortingJson).Content));
+            var result7 = Record.Exception(() => new CustomStack.Stack<int>(JsonConvert.DeserializeObject<LijstLeeg0>(sortingJson).Content));
+            var result8 = Record.Exception(() => new CustomStack.Stack<int?>(JsonConvert.DeserializeObject<LijstNull1>(sortingJson).Content));
             var result9 = Record.Exception(() => new CustomStack.Stack<int?>(JsonConvert.DeserializeObject<LijstNull3>(sortingJson).Content));
             var result10 = Record.Exception(() => new CustomStack.Stack<int>(JsonConvert.DeserializeObject<LijstOplopend10000>(sortingJson).Content));
             var result11 = Record.Exception(() => new CustomStack.Stack<int>(JsonConvert.DeserializeObject<LijstWillekeurig10000>(sortingJson).Content));

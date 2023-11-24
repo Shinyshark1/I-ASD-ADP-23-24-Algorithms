@@ -5,5 +5,5 @@ namespace Algorithms.JsonData.Sorteren.Models;
 public class LijstNull1
 {
     [JsonProperty("lijst_null_1")]
-    public object[] Content { get; set; }
+    public int?[] Content { get; set; }
 }
