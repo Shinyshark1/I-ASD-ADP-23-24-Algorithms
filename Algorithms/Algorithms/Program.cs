@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using Algorithms.Deque.Benchmarks;
 using Algorithms.DoublyLinkedList.Benchmarks;
 using Algorithms.DynamicArrays.Benchmarks;
 using Algorithms.PriorityQueue.Benchmarks;
@@ -16,7 +17,9 @@ public class Program
 
         //Run_StackBenchmarks();
 
-        Run_PriorityQueueBenchmarks();
+        //Run_PriorityQueueBenchmarks();
+
+        Run_DequeBenchmarks();
     }
 
     private static void Run_DynamicArrayBenchmarks()
@@ -111,6 +114,44 @@ public class Program
         foreach (int value in benchmarkValues)
         {
             benchmarkInstance.DeleteNext_Benchmark(value);
+            Console.WriteLine();
+        }
+    }
+
+    private static void Run_DequeBenchmarks()
+    {
+        List<int> benchmarkValues;
+        var benchmarkInstance = new DequeBenchmarks();
+
+        benchmarkValues = new List<int> { 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000 };
+        BenchmarkHelper.StartBenchmark("InsertLeft");
+        foreach (int value in benchmarkValues)
+        {
+            benchmarkInstance.InsertLeft_Benchmark(value);
+            Console.WriteLine();
+        }
+
+        benchmarkValues = new List<int> { 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000 };
+        BenchmarkHelper.StartBenchmark("InsertRight");
+        foreach (int value in benchmarkValues)
+        {
+            benchmarkInstance.InsertRight_Benchmark(value);
+            Console.WriteLine();
+        }
+
+        benchmarkValues = new List<int> { 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000 };
+        BenchmarkHelper.StartBenchmark("DeleteLeft");
+        foreach (int value in benchmarkValues)
+        {
+            benchmarkInstance.DeleteLeft_Benchmark(value);
+            Console.WriteLine();
+        }
+
+        benchmarkValues = new List<int> { 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000 };
+        BenchmarkHelper.StartBenchmark("DeleteRight");
+        foreach (int value in benchmarkValues)
+        {
+            benchmarkInstance.DeleteRight_Benchmark(value);
             Console.WriteLine();
         }
     }
