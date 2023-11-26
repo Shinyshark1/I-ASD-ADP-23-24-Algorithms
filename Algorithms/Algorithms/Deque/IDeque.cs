@@ -1,26 +1,26 @@
 ﻿namespace Algorithms.Deque
 {
-    public interface IDeque
+    public interface IDeque<T>
     {
         /// <summary>
-        /// Inserts an item on the left side of the queue.
+        /// Inserts an item on the start of the queue.
         /// </summary>
-        public void InsertLeft();
+        public void InsertLeft(T item);
 
         /// <summary>
-        /// Inserts an item on the right side of the queue.
+        /// Inserts an item on the end of the queue.
         /// </summary>
-        public void InsertRight();
+        public void InsertRight(T item);
 
         /// <summary>
-        /// Deletes an item on the left side of the queue.
+        /// Retrieves an item on the start of the queue and removes it from the queue.
         /// </summary>
-        public void DeleteLeft();
+        public T? DeleteLeft();
 
         /// <summary>
-        /// Deletes an item on the right side of the queue.
+        /// Retrieves an item on the end of the queue and removes it from the queue.
         /// </summary>
-        public void DeleteRight();
+        public T? DeleteRight();
 
         public int Count { get; }
     }
