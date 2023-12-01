@@ -4,6 +4,7 @@ using Algorithms.Deque.Benchmarks;
 using Algorithms.DoublyLinkedList.Benchmarks;
 using Algorithms.DynamicArrays.Benchmarks;
 using Algorithms.PriorityQueue.Benchmarks;
+using Algorithms.SelectionSort.Benchmarks;
 using Algorithms.Shared;
 using Algorithms.Stack.Benchmarks;
 
@@ -19,7 +20,9 @@ public class Program
 
         //Run_PriorityQueueBenchmarks();
 
-        Run_DequeBenchmarks();
+        //Run_DequeBenchmarks();
+
+        Run_SelectionSortBenchmarks();
     }
 
     private static void Run_DynamicArrayBenchmarks()
@@ -154,5 +157,18 @@ public class Program
             benchmarkInstance.DeleteRight_Benchmark(value);
             Console.WriteLine();
         }
+    }
+
+    private static void Run_SelectionSortBenchmarks()
+    {
+        // warm-up
+        SelectionSortBenchmarks.Sort_Benchmark(100);
+
+        // Actual benchmarks.
+        SelectionSortBenchmarks.Sort_Benchmark(1000);
+        SelectionSortBenchmarks.Sort_Benchmark(10000);
+        SelectionSortBenchmarks.Sort_Benchmark(100000);
+        SelectionSortBenchmarks.Sort_Benchmark(1000000);
+        SelectionSortBenchmarks.Sort_Benchmark(10000000);
     }
 }
