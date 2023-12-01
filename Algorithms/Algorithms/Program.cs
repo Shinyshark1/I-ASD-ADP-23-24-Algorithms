@@ -25,23 +25,7 @@ public class Program
 
         //Run_SelectionSortBenchmarks();
 
-        Run_InsertionSortBenchmarks();
-
-        //var array = DataSetHelper.CreateRandomDataSet(10);
-        //Console.WriteLine($"Unsorted array with {array.Length} elements with their indexes:");
-        //for (int i = 0; i < array.Length; i++)
-        //{
-        //    Console.WriteLine($"Array[{i}]: {array[i]}");
-        //}
-
-        //InsertionSort.Sort(array);
-        //Console.WriteLine();
-
-        //Console.WriteLine($"Sorted array with {array.Length} elements with their indexes:");
-        //for (int i = 0; i < array.Length; i++)
-        //{
-        //    Console.WriteLine($"Array[{i}]: {array[i]}");
-        //}
+        //Run_InsertionSortBenchmarks();
     }
 
     private static void Run_DynamicArrayBenchmarks()
