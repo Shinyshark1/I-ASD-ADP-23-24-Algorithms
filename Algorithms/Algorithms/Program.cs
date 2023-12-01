@@ -3,6 +3,7 @@
 using Algorithms.Deque.Benchmarks;
 using Algorithms.DoublyLinkedList.Benchmarks;
 using Algorithms.DynamicArrays.Benchmarks;
+using Algorithms.InsertionSort.Benchmarks;
 using Algorithms.PriorityQueue.Benchmarks;
 using Algorithms.SelectionSort.Benchmarks;
 using Algorithms.Shared;
@@ -22,7 +23,25 @@ public class Program
 
         //Run_DequeBenchmarks();
 
-        Run_SelectionSortBenchmarks();
+        //Run_SelectionSortBenchmarks();
+
+        Run_InsertionSortBenchmarks();
+
+        //var array = DataSetHelper.CreateRandomDataSet(10);
+        //Console.WriteLine($"Unsorted array with {array.Length} elements with their indexes:");
+        //for (int i = 0; i < array.Length; i++)
+        //{
+        //    Console.WriteLine($"Array[{i}]: {array[i]}");
+        //}
+
+        //InsertionSort.Sort(array);
+        //Console.WriteLine();
+
+        //Console.WriteLine($"Sorted array with {array.Length} elements with their indexes:");
+        //for (int i = 0; i < array.Length; i++)
+        //{
+        //    Console.WriteLine($"Array[{i}]: {array[i]}");
+        //}
     }
 
     private static void Run_DynamicArrayBenchmarks()
@@ -169,6 +188,17 @@ public class Program
         SelectionSortBenchmarks.Sort_Benchmark(10000);
         SelectionSortBenchmarks.Sort_Benchmark(100000);
         SelectionSortBenchmarks.Sort_Benchmark(1000000);
-        SelectionSortBenchmarks.Sort_Benchmark(10000000);
+    }
+
+    private static void Run_InsertionSortBenchmarks()
+    {
+        // warm-up
+        InsertionSortBenchmarks.Sort_Benchmark(100);
+
+        // Actual benchmarks.
+        InsertionSortBenchmarks.Sort_Benchmark(1000);
+        InsertionSortBenchmarks.Sort_Benchmark(10000);
+        InsertionSortBenchmarks.Sort_Benchmark(100000);
+        InsertionSortBenchmarks.Sort_Benchmark(1000000);
     }
 }
