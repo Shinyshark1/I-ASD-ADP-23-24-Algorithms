@@ -46,11 +46,13 @@
             // We sort until we have exhausted either side completely.
             while (startIndex <= middle && rightIndex <= end)
             {
+                // If our left hand item is smaller or equal to our right hand item, we insert our left hand item.
                 if (array[startIndex] <= array[rightIndex])
                 {
                     temporaryArray[mergedIndex] = array[startIndex];
                     startIndex++;
                 }
+                // Otherwise we insert our right hand item.
                 else
                 {
                     temporaryArray[mergedIndex] = array[rightIndex];
@@ -78,6 +80,7 @@
 
             // Copy the merged elements back to the original array.
             // This allows us to not have to make new arrays each time.
+            // By using 'start' and 'end', we move the parts of the array that were used in this current merge.
             for (int i = start; i <= end; i++)
             {
                 array[i] = temporaryArray[i];
