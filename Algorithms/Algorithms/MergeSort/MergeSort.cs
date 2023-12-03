@@ -24,11 +24,20 @@
             if (start < end)
             {
                 int middle = (start + end) / 2;
-                // We merge and sort the start side all the way down.
-                MergeAndSort(array, temporaryArray, start, middle);
 
-                // We merge and sort the end side all the way down
-                MergeAndSort(array, temporaryArray, middle + 1, end);
+                // Parallelize the recursive calls
+                Parallel.Invoke(
+                    () =>
+                    {
+                        // We merge and sort the start side all the way down.
+                        MergeAndSort(array, temporaryArray, start, middle);
+                    },
+                    () =>
+                    {
+                        // We merge and sort the end side all the way down
+                        MergeAndSort(array, temporaryArray, middle + 1, end);
+                    }
+                );
 
                 // When the start side is all the way deconstructed to singular items
                 // And the end side if all the way deconstructed to singular items
