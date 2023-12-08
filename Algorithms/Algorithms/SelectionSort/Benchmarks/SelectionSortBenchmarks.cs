@@ -18,5 +18,19 @@ namespace Algorithms.SelectionSort.Benchmarks
             var firstResult = sw.Elapsed;
             Console.WriteLine($"Size: {size} - Elapsed time: {firstResult}");
         }
+
+        public static void Sort_SortedArray_Benchmark(int size)
+        {
+            Console.WriteLine($"Starting benchmark for sorting {size} items.");
+            int[] array = DataSetHelper.CreateOrderedDataSet(size);
+            var sw = new Stopwatch();
+
+            sw.Start();
+            SelectionSort.Sort(array);
+            sw.Stop();
+
+            var firstResult = sw.Elapsed;
+            Console.WriteLine($"Size: {size} - Elapsed time: {firstResult}");
+        }
     }
 }

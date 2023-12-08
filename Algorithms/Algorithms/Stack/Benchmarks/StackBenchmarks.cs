@@ -24,7 +24,7 @@ namespace Algorithms.Stack.Benchmarks
         public void Pop_Benchmark(int size)
         {
             Console.WriteLine($"Starting pop benchmark with {size} items.");
-            Stack<int> stack = new(DataSetHelper.CreateDataSet(size));
+            Stack<int> stack = new(DataSetHelper.CreateOrderedDataSet(size));
             var stackSize = stack.Size();
 
             var sw = new Stopwatch();
@@ -42,7 +42,7 @@ namespace Algorithms.Stack.Benchmarks
         public void Top_Benchmark(int size)
         {
             Console.WriteLine($"Starting top benchmark with {size} items.");
-            Stack<int> stack = new(DataSetHelper.CreateDataSet(size));
+            Stack<int> stack = new(DataSetHelper.CreateOrderedDataSet(size));
             var sw = new Stopwatch();
 
             sw.Start();

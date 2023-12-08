@@ -40,7 +40,7 @@ namespace Algorithms.Deque.Benchmarks
         public void DeleteLeft_Benchmark(int size)
         {
             Console.WriteLine($"Starting DeleteLeft benchmark with {size} items.");
-            var deque = new Deque<int>(DataSetHelper.CreateDataSet(size));
+            var deque = new Deque<int>(DataSetHelper.CreateOrderedDataSet(size));
 
             var sw = new Stopwatch();
             sw.Start();
@@ -56,7 +56,7 @@ namespace Algorithms.Deque.Benchmarks
         public void DeleteRight_Benchmark(int size)
         {
             Console.WriteLine($"Starting DeleteRight benchmark with {size} items.");
-            var deque = new Deque<int>(DataSetHelper.CreateDataSet(size));
+            var deque = new Deque<int>(DataSetHelper.CreateOrderedDataSet(size));
 
             var sw = new Stopwatch();
             sw.Start();

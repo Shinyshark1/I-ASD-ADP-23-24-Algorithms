@@ -45,7 +45,7 @@ namespace Algorithms.PriorityQueue.Benchmarks
             Console.WriteLine($"Starting FindNext benchmark with {size} items.");
             var sw = new Stopwatch();
 
-            PriorityQueue<int> priorityQueue = new(DataSetHelper.CreateDataSet(size));
+            PriorityQueue<int> priorityQueue = new(DataSetHelper.CreateOrderedDataSet(size));
             sw.Start();
             priorityQueue.FindNext();
             sw.Stop();
@@ -55,7 +55,7 @@ namespace Algorithms.PriorityQueue.Benchmarks
 
             sw.Reset();
 
-            GenericPriorityQueue<int, int> genericPriorityQueue = new(DataSetHelper.CreateDataSet(size));
+            GenericPriorityQueue<int, int> genericPriorityQueue = new(DataSetHelper.CreateOrderedDataSet(size));
             sw.Start();
             genericPriorityQueue.FindNext();
             sw.Stop();
@@ -73,7 +73,7 @@ namespace Algorithms.PriorityQueue.Benchmarks
             var sw = new Stopwatch();
             var count = 0;
 
-            PriorityQueue<int> priorityQueue = new(DataSetHelper.CreateDataSet(size));
+            PriorityQueue<int> priorityQueue = new(DataSetHelper.CreateOrderedDataSet(size));
             count = priorityQueue.Count;
 
             sw.Start();
@@ -88,7 +88,7 @@ namespace Algorithms.PriorityQueue.Benchmarks
 
             sw.Reset();
 
-            GenericPriorityQueue<int, int> genericPriorityQueue = new(DataSetHelper.CreateDataSet(size));
+            GenericPriorityQueue<int, int> genericPriorityQueue = new(DataSetHelper.CreateOrderedDataSet(size));
             count = genericPriorityQueue.Count;
 
             sw.Start();

@@ -30,7 +30,7 @@ namespace Algorithms.DynamicArrays.Benchmarks
             var sw = new Stopwatch();
             var count = 0;
 
-            testData = new DynamicArray<int>(DataSetHelper.CreateDataSet(size));
+            testData = new DynamicArray<int>(DataSetHelper.CreateOrderedDataSet(size));
 
             sw.Start();
             count = testData.Count;
@@ -45,7 +45,7 @@ namespace Algorithms.DynamicArrays.Benchmarks
 
             sw.Reset();
 
-            testData = new DynamicArray<int>(DataSetHelper.CreateDataSet(size));
+            testData = new DynamicArray<int>(DataSetHelper.CreateOrderedDataSet(size));
 
             sw.Start();
             count = testData.Count;

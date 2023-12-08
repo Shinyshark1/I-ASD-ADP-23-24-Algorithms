@@ -11,7 +11,7 @@ namespace Algorithms.DoublyLinkedList.Benchmarks
             DoublyLinkedList<int> testData;
             var sw = new Stopwatch();
 
-            testData = new DoublyLinkedList<int>(DataSetHelper.CreateDataSet(size));
+            testData = new DoublyLinkedList<int>(DataSetHelper.CreateOrderedDataSet(size));
 
             // First we test the normal remove. This will move through the list once and remove an item as it goes.
             // It will traverse the whole list only once in doing so.
@@ -24,7 +24,7 @@ namespace Algorithms.DoublyLinkedList.Benchmarks
 
             sw.Restart();
 
-            testData = new DoublyLinkedList<int>(DataSetHelper.CreateDataSet(size));
+            testData = new DoublyLinkedList<int>(DataSetHelper.CreateOrderedDataSet(size));
 
             // This test removes recursively. It is a lazy way that reuses the IndexOf method.
             // Each time an item is found, we just recursively call the remove method.
