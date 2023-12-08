@@ -8,8 +8,28 @@
             return array;
         }
 
-        // This works in the same way as the Merge Sort.
         private static int[] InternalQuickSort(int[] array, int low, int high)
+        {
+            if (low < high)
+            {
+                int pivotIndex = Partition(array, low, high);
+                Parallel.Invoke(
+                    () => InternalQuickSort(array, low, pivotIndex - 1),
+                    () => InternalQuickSort(array, pivotIndex + 1, high)
+                );
+            }
+
+            return array;
+        }
+
+        public static int[] Sort_WithoutParallel(int[] array)
+        {
+            InternalQuickSort_WithoutParallel(array, 0, array.Length - 1);
+            return array;
+        }
+
+        // This works in the same way as the Merge Sort.
+        private static int[] InternalQuickSort_WithoutParallel(int[] array, int low, int high)
         {
             if (low < high)
             {

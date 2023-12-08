@@ -6,6 +6,7 @@ using Algorithms.DynamicArrays.Benchmarks;
 using Algorithms.InsertionSort.Benchmarks;
 using Algorithms.MergeSort.Benchmarks;
 using Algorithms.PriorityQueue.Benchmarks;
+using Algorithms.QuickSort.Benchmark;
 using Algorithms.SelectionSort.Benchmarks;
 using Algorithms.Shared;
 using Algorithms.Stack.Benchmarks;
@@ -28,7 +29,9 @@ public class Program
 
         //Run_InsertionSortBenchmarks();
 
-        Run_MergeSortBenchmarks();
+        //Run_MergeSortBenchmarks();
+
+        Run_QuickSortBenchmarks();
     }
 
     private static void Run_DynamicArrayBenchmarks()
@@ -201,5 +204,19 @@ public class Program
         MergeSortBenchmarks.Sort_Benchmark(1000000);
         MergeSortBenchmarks.Sort_Benchmark(10000000);
         MergeSortBenchmarks.Sort_Benchmark(100000000);
+    }
+
+    private static void Run_QuickSortBenchmarks()
+    {
+        // warm-up
+        QuickSortBenchmarks.Sort_Benchmark(100);
+
+        // Actual benchmarks.
+        QuickSortBenchmarks.Sort_Benchmark(1000);
+        QuickSortBenchmarks.Sort_Benchmark(10000);
+        QuickSortBenchmarks.Sort_Benchmark(100000);
+        QuickSortBenchmarks.Sort_Benchmark(1000000);
+        QuickSortBenchmarks.Sort_Benchmark(10000000);
+        QuickSortBenchmarks.Sort_Benchmark(100000000);
     }
 }
