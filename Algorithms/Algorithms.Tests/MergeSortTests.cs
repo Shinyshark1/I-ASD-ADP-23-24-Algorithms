@@ -41,7 +41,7 @@ namespace Algorithms.Tests
         }
 
         [Fact]
-        public void InsertionSort_Sort_SortsTheArrays()
+        public void MergeSort_Sort_SortsTheArrays()
         {
             // Arrange
             int[] firstArray = DataSetHelper.CreateRandomDataSet(20);
