@@ -220,6 +220,8 @@ public class Program
 
     private static void Run_InsertionSortBenchmarks()
     {
+        Console.WriteLine("--= Random arrays ==-");
+
         // warm-up
         InsertionSortBenchmarks.Sort_Benchmark(100);
 
@@ -228,6 +230,42 @@ public class Program
         InsertionSortBenchmarks.Sort_Benchmark(10000);
         InsertionSortBenchmarks.Sort_Benchmark(100000);
         InsertionSortBenchmarks.Sort_Benchmark(1000000);
+
+        Console.WriteLine();
+        Console.WriteLine("--= Sorted arrays ==-");
+
+        // warm-up
+        InsertionSortBenchmarks.Sort_SortedArray_Benchmark(100);
+
+        // Actual benchmarks.
+        InsertionSortBenchmarks.Sort_SortedArray_Benchmark(1000);
+        InsertionSortBenchmarks.Sort_SortedArray_Benchmark(10000);
+        InsertionSortBenchmarks.Sort_SortedArray_Benchmark(100000);
+        InsertionSortBenchmarks.Sort_SortedArray_Benchmark(1000000);
+
+        Console.WriteLine();
+        Console.WriteLine("--= Reversed arrays ==-");
+
+        // warm-up
+        InsertionSortBenchmarks.Sort_ReversedArray_Benchmark(100);
+
+        // Actual benchmarks.
+        InsertionSortBenchmarks.Sort_ReversedArray_Benchmark(1000);
+        InsertionSortBenchmarks.Sort_ReversedArray_Benchmark(10000);
+        InsertionSortBenchmarks.Sort_ReversedArray_Benchmark(100000);
+        InsertionSortBenchmarks.Sort_ReversedArray_Benchmark(1000000);
+
+        Console.WriteLine();
+        Console.WriteLine("--= Equal arrays ==-");
+
+        // warm-up
+        InsertionSortBenchmarks.Sort_EqualArray_Benchmark(100);
+
+        // Actual benchmarks.
+        InsertionSortBenchmarks.Sort_EqualArray_Benchmark(1000);
+        InsertionSortBenchmarks.Sort_EqualArray_Benchmark(10000);
+        InsertionSortBenchmarks.Sort_EqualArray_Benchmark(100000);
+        InsertionSortBenchmarks.Sort_EqualArray_Benchmark(1000000);
     }
 
     private static void Run_MergeSortBenchmarks()

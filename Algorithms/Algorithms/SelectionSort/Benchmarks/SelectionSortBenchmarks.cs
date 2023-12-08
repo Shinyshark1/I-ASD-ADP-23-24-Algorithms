@@ -50,7 +50,7 @@ namespace Algorithms.SelectionSort.Benchmarks
         public static void Sort_EqualArray_Benchmark(int size)
         {
             Console.WriteLine($"Starting benchmark for sorting {size} items.");
-            int[] array = DataSetHelper.CreateReversedDataSet(size);
+            int[] array = DataSetHelper.CreateEqualDataSet(size);
             var sw = new Stopwatch();
 
             sw.Start();
