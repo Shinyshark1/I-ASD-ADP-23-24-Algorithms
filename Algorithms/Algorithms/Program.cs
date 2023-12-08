@@ -25,13 +25,13 @@ public class Program
 
         //Run_DequeBenchmarks();
 
-        //Run_SelectionSortBenchmarks();
+        Run_SelectionSortBenchmarks();
 
         //Run_InsertionSortBenchmarks();
 
         //Run_MergeSortBenchmarks();
 
-        Run_QuickSortBenchmarks();
+        //Run_QuickSortBenchmarks();
     }
 
     private static void Run_DynamicArrayBenchmarks()
@@ -170,6 +170,8 @@ public class Program
 
     private static void Run_SelectionSortBenchmarks()
     {
+        Console.WriteLine("--= Random arrays ==-");
+
         // warm-up
         SelectionSortBenchmarks.Sort_Benchmark(100);
 
@@ -178,6 +180,42 @@ public class Program
         SelectionSortBenchmarks.Sort_Benchmark(10000);
         SelectionSortBenchmarks.Sort_Benchmark(100000);
         SelectionSortBenchmarks.Sort_Benchmark(1000000);
+
+        Console.WriteLine();
+        Console.WriteLine("--= Sorted arrays ==-");
+
+        // warm-up
+        SelectionSortBenchmarks.Sort_SortedArray_Benchmark(100);
+
+        // Actual benchmarks.
+        SelectionSortBenchmarks.Sort_SortedArray_Benchmark(1000);
+        SelectionSortBenchmarks.Sort_SortedArray_Benchmark(10000);
+        SelectionSortBenchmarks.Sort_SortedArray_Benchmark(100000);
+        SelectionSortBenchmarks.Sort_SortedArray_Benchmark(1000000);
+
+        Console.WriteLine();
+        Console.WriteLine("--= Reversed arrays ==-");
+
+        // warm-up
+        SelectionSortBenchmarks.Sort_ReversedArray_Benchmark(100);
+
+        // Actual benchmarks.
+        SelectionSortBenchmarks.Sort_ReversedArray_Benchmark(1000);
+        SelectionSortBenchmarks.Sort_ReversedArray_Benchmark(10000);
+        SelectionSortBenchmarks.Sort_ReversedArray_Benchmark(100000);
+        SelectionSortBenchmarks.Sort_ReversedArray_Benchmark(1000000);
+
+        Console.WriteLine();
+        Console.WriteLine("--= Equal arrays ==-");
+
+        // warm-up
+        SelectionSortBenchmarks.Sort_EqualArray_Benchmark(100);
+
+        // Actual benchmarks.
+        SelectionSortBenchmarks.Sort_EqualArray_Benchmark(1000);
+        SelectionSortBenchmarks.Sort_EqualArray_Benchmark(10000);
+        SelectionSortBenchmarks.Sort_EqualArray_Benchmark(100000);
+        SelectionSortBenchmarks.Sort_EqualArray_Benchmark(1000000);
     }
 
     private static void Run_InsertionSortBenchmarks()
