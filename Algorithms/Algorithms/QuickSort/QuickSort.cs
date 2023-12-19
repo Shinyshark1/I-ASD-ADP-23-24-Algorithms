@@ -28,7 +28,6 @@
             return array;
         }
 
-        // This works in the same way as the Merge Sort.
         private static int[] InternalQuickSort_WithoutParallel(int[] array, int low, int high)
         {
             if (low < high)
@@ -43,28 +42,20 @@
 
         private static int Partition(int[] array, int low, int high)
         {
-            // We find the pivot index by using our median strategy.
             int pivotIndex = DeterminePivotIndex(array, low, high);
-
-            // We have to swap our pivot to the end of our current selection so that it is in the right spot.
             Swap(array, pivotIndex, high);
-
-            // Now that our pivot has been swapped to be in the right position, we can pick it up from our high spot.
-            int pivot = array[high];
+            int pivotValue = array[high];
 
             int i = low - 1;
             for (int j = low; j < high; j++)
             {
-                // If we find an item that is smaller than our pivot we move it to the low part of our array.
-                // We keep moving our low part up by one each time this happens.
-                if (array[j] < pivot)
+                if (array[j] < pivotValue)
                 {
                     i++;
                     Swap(array, i, j);
                 }
             }
 
-            // Now that we're done, we move our pivot behind all the items that were smaller than it and infront of all the items that were larger than it.
             Swap(array, i + 1, high);
             return i + 1;
         }
