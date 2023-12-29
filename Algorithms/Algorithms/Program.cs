@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using Algorithms.BinarySearch.Benchmarks;
 using Algorithms.Deque.Benchmarks;
 using Algorithms.DoublyLinkedList.Benchmarks;
 using Algorithms.DynamicArrays.Benchmarks;
@@ -25,7 +26,9 @@ public class Program
 
         //Run_DequeBenchmarks();
 
-        Run_SelectionSortBenchmarks();
+        Run_BinarySearchBenchmarks();
+
+        //Run_SelectionSortBenchmarks();
 
         //Run_InsertionSortBenchmarks();
 
@@ -164,6 +167,36 @@ public class Program
         foreach (int value in benchmarkValues)
         {
             benchmarkInstance.DeleteRight_Benchmark(value);
+            Console.WriteLine();
+        }
+    }
+
+    private static void Run_BinarySearchBenchmarks()
+    {
+        List<int> benchmarkValues;
+        var benchmarkInstance = new BinarySearchBenchmarks();
+
+        benchmarkValues = new List<int> { 10, 100, 1000, 10000 };
+        BenchmarkHelper.StartBenchmark("Add");
+        foreach (int value in benchmarkValues)
+        {
+            benchmarkInstance.Add_Benchmark(value);
+            Console.WriteLine();
+        }
+
+        benchmarkValues = new List<int> { 10, 100, 1000, 10000 };
+        BenchmarkHelper.StartBenchmark("RemoveAt");
+        foreach (int value in benchmarkValues)
+        {
+            benchmarkInstance.RemoveAt_Benchmark(value);
+            Console.WriteLine();
+        }
+
+        benchmarkValues = new List<int> { 10, 100, 1000, 10000 };
+        BenchmarkHelper.StartBenchmark("IndexOf");
+        foreach (int value in benchmarkValues)
+        {
+            benchmarkInstance.IndexOf_Benchmark(value);
             Console.WriteLine();
         }
     }
