@@ -4,6 +4,7 @@ using Algorithms.BinarySearch.Benchmarks;
 using Algorithms.Deque.Benchmarks;
 using Algorithms.DoublyLinkedList.Benchmarks;
 using Algorithms.DynamicArrays.Benchmarks;
+using Algorithms.Hashtable.Benchmarks;
 using Algorithms.InsertionSort.Benchmarks;
 using Algorithms.MergeSort.Benchmarks;
 using Algorithms.PriorityQueue.Benchmarks;
@@ -26,7 +27,7 @@ public class Program
 
         //Run_DequeBenchmarks();
 
-        Run_BinarySearchBenchmarks();
+        //Run_BinarySearchBenchmarks();
 
         //Run_SelectionSortBenchmarks();
 
@@ -35,6 +36,8 @@ public class Program
         //Run_MergeSortBenchmarks();
 
         //Run_QuickSortBenchmarks();
+
+        Run_HashtableBenchmarks();
     }
 
     private static void Run_DynamicArrayBenchmarks()
@@ -399,5 +402,41 @@ public class Program
         QuickSortBenchmarks.Sort_EqualArray_Benchmark(10000);
         QuickSortBenchmarks.Sort_EqualArray_Benchmark(100000);
         QuickSortBenchmarks.Sort_EqualArray_Benchmark(1000000);
+    }
+
+    private static void Run_HashtableBenchmarks()
+    {
+        // 100000 causes the hashtable to be full.
+        var benchmarkValues = new List<int> { 10, 100, 1000, 10000 };
+        BenchmarkHelper.StartBenchmark("Insert");
+        foreach (int value in benchmarkValues)
+        {
+            HashtableBenchmarks.Insert_Benchmark(value);
+            Console.WriteLine();
+        }
+
+        benchmarkValues = new List<int> { 10, 100, 1000, 10000 };
+        BenchmarkHelper.StartBenchmark("Get");
+        foreach (int value in benchmarkValues)
+        {
+            HashtableBenchmarks.Get_Benchmark(value);
+            Console.WriteLine();
+        }
+
+        benchmarkValues = new List<int> { 10, 100, 1000, 10000 };
+        BenchmarkHelper.StartBenchmark("Delete");
+        foreach (int value in benchmarkValues)
+        {
+            HashtableBenchmarks.Delete_Benchmark(value);
+            Console.WriteLine();
+        }
+
+        benchmarkValues = new List<int> { 10, 100, 1000, 10000 };
+        BenchmarkHelper.StartBenchmark("Update");
+        foreach (int value in benchmarkValues)
+        {
+            HashtableBenchmarks.Update_Benchmark(value);
+            Console.WriteLine();
+        }
     }
 }
