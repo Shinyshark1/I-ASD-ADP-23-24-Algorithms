@@ -1,9 +1,69 @@
-﻿using Algorithms.Hashtable;
+﻿using Algorithms.DynamicArrays;
+using Algorithms.Hashtable;
+using Algorithms.JsonData.Sorteren.Models;
+using Algorithms.JsonData;
+using Newtonsoft.Json;
+using Algorithms.JsonData.Hashing.Models;
 
 namespace Algorithms.Tests
 {
     public class HashtableTests
     {
+        [Fact]
+        public void TheDataSets_Fit_InTheHashtable()
+        {
+            var hashingJson = JsonConstants.ReadDataSetHashing();
+            var hashTableKeyValues = JsonConvert.DeserializeObject<HashtabelsleutelswaardesRoot>(hashingJson)!.Hashtabelsleutelswaardes;
+
+            var hashTable = new Hashtable<object>();
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.A), hashTableKeyValues.A[0])));
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.B), hashTableKeyValues.B[0])));
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.C), hashTableKeyValues.C[0])));
+
+            // The key already exists, so we'd have duplicate keys.
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.D), hashTableKeyValues.D[0])));
+            Assert.Throws<InvalidOperationException>(() => hashTable.Insert(nameof(hashTableKeyValues.D), hashTableKeyValues.D[1]));
+
+            // There is no values to insert here, so we cannot even access them.
+            Assert.Throws<ArgumentOutOfRangeException>(() => hashTable.Insert(nameof(hashTableKeyValues.E), hashTableKeyValues.E[0]));
+            Assert.Throws<ArgumentOutOfRangeException>(() => hashTable.Insert(nameof(hashTableKeyValues.F), hashTableKeyValues.F[0]));
+            Assert.Throws<ArgumentOutOfRangeException>(() => hashTable.Insert(nameof(hashTableKeyValues.G), hashTableKeyValues.G[0]));
+            Assert.Throws<ArgumentOutOfRangeException>(() => hashTable.Insert(nameof(hashTableKeyValues.H), hashTableKeyValues.H[0]));
+            Assert.Throws<ArgumentOutOfRangeException>(() => hashTable.Insert(nameof(hashTableKeyValues.I), hashTableKeyValues.I[0]));
+
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.J), hashTableKeyValues.J[0])));
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.K), hashTableKeyValues.K[0])));
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.L), hashTableKeyValues.L[0])));
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.M), hashTableKeyValues.M[0])));
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.N), hashTableKeyValues.N[0])));
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.O), hashTableKeyValues.O[0])));
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.P), hashTableKeyValues.P[0])));
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.Q), hashTableKeyValues.Q[0])));
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.R), hashTableKeyValues.R[0])));
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.S), hashTableKeyValues.S[0])));
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.T), hashTableKeyValues.T[0])));
+
+            // The key already exists, so we'd have duplicate keys.
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.U), hashTableKeyValues.U[0])));
+            Assert.Throws<InvalidOperationException>(() => hashTable.Insert(nameof(hashTableKeyValues.U), hashTableKeyValues.U[1]));
+
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.V), hashTableKeyValues.V[0])));
+
+            // The key already exists, so we'd have duplicate keys.
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.W), hashTableKeyValues.W[0])));
+            Assert.Throws<InvalidOperationException>(() => hashTable.Insert(nameof(hashTableKeyValues.W), hashTableKeyValues.W[1]));
+            Assert.Throws<InvalidOperationException>(() => hashTable.Insert(nameof(hashTableKeyValues.W), hashTableKeyValues.W[2]));
+            Assert.Throws<InvalidOperationException>(() => hashTable.Insert(nameof(hashTableKeyValues.W), hashTableKeyValues.W[3]));
+            Assert.Throws<InvalidOperationException>(() => hashTable.Insert(nameof(hashTableKeyValues.W), hashTableKeyValues.W[4]));
+
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.X), hashTableKeyValues.X[0])));
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.Y), hashTableKeyValues.Y[0])));
+            Assert.Null(Record.Exception(() => hashTable.Insert(nameof(hashTableKeyValues.Z), hashTableKeyValues.Z[0])));
+
+            // Our hashing function doesn't deal properly with integers, causing our chosen index to be -24.
+            Assert.Throws<IndexOutOfRangeException>(() => hashTable.Insert(nameof(hashTableKeyValues.Z0), hashTableKeyValues.Z0[0]));
+        }
+
         [Fact]
         public void Insert_Throws_IfThereIsNoSpaceLeft()
         {
