@@ -6,12 +6,15 @@ using Algorithms.DoublyLinkedList.Benchmarks;
 using Algorithms.DynamicArrays.Benchmarks;
 using Algorithms.Hashtable.Benchmarks;
 using Algorithms.InsertionSort.Benchmarks;
+using Algorithms.JsonData;
+using Algorithms.JsonData.Grafen.Models;
 using Algorithms.MergeSort.Benchmarks;
 using Algorithms.PriorityQueue.Benchmarks;
 using Algorithms.QuickSort.Benchmark;
 using Algorithms.SelectionSort.Benchmarks;
 using Algorithms.Shared;
 using Algorithms.Stack.Benchmarks;
+using Newtonsoft.Json;
 
 public class Program
 {
@@ -37,7 +40,11 @@ public class Program
 
         //Run_QuickSortBenchmarks();
 
-        Run_HashtableBenchmarks();
+        //Run_HashtableBenchmarks();
+
+        var graphData = JsonConstants.ReadDataSetGraphing();
+        var test = JsonConvert.DeserializeObject<GraphData>(graphData);
+        Console.WriteLine();
     }
 
     private static void Run_DynamicArrayBenchmarks()
