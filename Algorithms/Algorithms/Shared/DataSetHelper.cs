@@ -1,7 +1,17 @@
-﻿namespace Algorithms.Shared
+﻿using System;
+
+namespace Algorithms.Shared
 {
     public static class DataSetHelper
     {
+        private static readonly Random _random = new();
+        public static string RandomString(int length)
+        {
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[_random.Next(s.Length)]).ToArray());
+        }
+
         /// <summary>
         /// Creates an array of ints in order from 1 to whatever size you give.
         /// </summary>
@@ -69,6 +79,18 @@
             }
 
             return data;
+        }
+
+        public static Dictionary<string, int> CreateRandomKeyValuePairs(int size)
+        {
+            var dictionary = new Dictionary<string, int>();
+            for (int i = 0; i < size; i++)
+            {
+                var randomKey = RandomString(8);
+                dictionary.Add(randomKey, _random.Next(size));
+            }
+
+            return dictionary;
         }
     }
 }
