@@ -1,9 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Algorithms.JsonData.Grafen.Models
 {
@@ -24,7 +19,7 @@ namespace Algorithms.JsonData.Grafen.Models
         /// ]
         /// </summary>
         [JsonProperty("lijnlijst")]
-        public List<List<int>> Lijnlijst { get; set; }
+        public int[,] Lijnlijst { get; set; }
 
         /// <summary>
         /// In this representation, for each node (index), you have a list of all other nodes to which it's directly connected.
@@ -35,7 +30,7 @@ namespace Algorithms.JsonData.Grafen.Models
         /// "verbindingslijst": [[1, 2], [0, 2, 3], [0, 1, 4], [6, 8]]
         /// </summary>
         [JsonProperty("verbindingslijst")]
-        public List<List<int>> Verbindingslijst { get; set; }
+        public int[][] Verbindingslijst { get; set; }
 
         /// <summary>
         /// TODO: Explain how this works.
@@ -47,7 +42,7 @@ namespace Algorithms.JsonData.Grafen.Models
 
         #region Weighted Data
         [JsonProperty("lijnlijst_gewogen")]
-        public List<List<int>> LijnlijstGewogen { get; set; }
+        public int[,] LijnlijstGewogen { get; set; }
 
         [JsonProperty("verbindingslijst_gewogen")]
         public List<List<List<int>>> VerbindingslijstGewogen { get; set; }
