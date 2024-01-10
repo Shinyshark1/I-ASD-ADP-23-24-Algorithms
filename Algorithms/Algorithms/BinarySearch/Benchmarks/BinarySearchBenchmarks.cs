@@ -1,11 +1,5 @@
-﻿using Algorithms.Deque;
-using Algorithms.Shared;
-using System;
-using System.Collections.Generic;
+﻿using Algorithms.Shared;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Algorithms.BinarySearch.Benchmarks
 {
@@ -27,7 +21,6 @@ namespace Algorithms.BinarySearch.Benchmarks
             Console.WriteLine($"Size: {size} - Elapsed time: {sw.Elapsed}");
         }
 
-        // RemoveAt benchmark
         public void RemoveAt_Benchmark(int size)
         {
             Console.WriteLine($"Starting Add benchmark with {size} items.");
