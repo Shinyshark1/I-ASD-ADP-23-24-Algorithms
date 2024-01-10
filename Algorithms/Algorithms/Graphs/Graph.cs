@@ -50,9 +50,9 @@ namespace Algorithms.Graphs
         {
             for (int i = 0; i < lineList.GetLength(0); i++)
             {
-                var key = $"vertex-{lineList[i, 0]}";
+                var key = $"V{lineList[i, 0]}";
                 Vertex vertex = CreateAndRetrieveKey(key);
-                var newVertex = new Vertex($"vertex-{lineList[i, 1]}");
+                var newVertex = new Vertex($"V{lineList[i, 1]}");
 
                 var cost = 0;
                 if (lineList.GetLength(1) == 3)
@@ -67,11 +67,11 @@ namespace Algorithms.Graphs
         {
             for (int i = 0; i < connectionList.Length; i++)
             {
-                var key = $"vertex-{i}";
+                var key = $"V{i}";
                 var vertex = CreateAndRetrieveKey(key);
                 for (int j = 0; j < connectionList[i].Length; j++)
                 {
-                    var newVertex = new Vertex($"vertex-{connectionList[i][j]}");
+                    var newVertex = new Vertex($"V{connectionList[i][j]}");
                     vertex.AddEdge(newVertex, 0);
                 }
             }
@@ -81,11 +81,11 @@ namespace Algorithms.Graphs
         {
             for (int i = 0; i < connectionList.Length; i++)
             {
-                var key = $"vertex-{i}";
+                var key = $"V{i}";
                 var vertex = CreateAndRetrieveKey(key);
                 for (int j = 0; j < connectionList[i].Length; j++)
                 {
-                    var newVertex = new Vertex($"vertex-{connectionList[i][j][0]}");
+                    var newVertex = new Vertex($"V{connectionList[i][j][0]}");
                     vertex.AddEdge(newVertex, connectionList[i][j][1]);
                 }
             }
@@ -95,7 +95,7 @@ namespace Algorithms.Graphs
         {
             for (int i = 0; i < matrixList.GetLength(0); i++)
             {
-                var key = $"vertex-{i}";
+                var key = $"V{i}";
                 var vertex = CreateAndRetrieveKey(key);
                 for (int j = 0; j < matrixList[i].Length; j++)
                 {
@@ -105,7 +105,7 @@ namespace Algorithms.Graphs
                         continue;
                     }
 
-                    var newVertex = new Vertex($"vertex-{j}");
+                    var newVertex = new Vertex($"V{j}");
                     vertex.AddEdge(newVertex, cost);
                 }
             }
