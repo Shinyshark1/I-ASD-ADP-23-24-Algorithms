@@ -22,24 +22,86 @@ namespace Algorithms.Graphs
 
         #region CRUD Action 
 
-        public void AddVertex(Vertex vertex, IEnumerable<Vertex> links)
+        /// <summary>
+        /// Adds the provided vertex to the <see cref="Graph"/>.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Thrown when a vertex with the same name already exists in the graph.</exception>
+        public void AddVertex(string vertexName)
         {
-            // Retrieve the vertex by name and then add links between that and the other vertices.
+            AddVertex(new Vertex(vertexName));
         }
 
+        /// <summary>
+        /// Adds the provided vertex to the <see cref="Graph"/>.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Thrown when a vertex with the same name already exists in the graph.</exception>
+        public void AddVertex(Vertex vertex)
+        {
+            if (_vertexDictionary.ContainsKey(vertex.Name))
+            {
+                throw new InvalidOperationException($"Vertex '{vertex.Name}' already exists in the Graph.");
+            }
+
+            _vertexDictionary.Add(vertex.Name, vertex);
+        }
+
+
+        /// <summary>
+        /// Removes all the edges to the provided vertex and removes it from the Graph.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Thrown when no vertex of the provided name exists in the graph.</exception>
+        public void RemoveVertex(string vertexName)
+        {
+            RemoveVertex(new Vertex(vertexName));
+        }
+
+        /// <summary>
+        /// Removes all the edges to the provided vertex and removes it from the Graph.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Thrown when no vertex of the provided name exists in the graph.</exception>
         public void RemoveVertex(Vertex vertex)
         {
-            // Remove the vertex, unlinking it from the rest.
+            if (_vertexDictionary.ContainsKey(vertex.Name) == false)
+            {
+                throw new InvalidOperationException($"Vertex '{vertex.Name}' does not exist in the Graph.");
+            }
+
+            foreach (var keyValuePair in _vertexDictionary)
+            {
+                _ = RemoveEdge(vertex.Name, keyValuePair.Value.Name);
+            }
+
+            _vertexDictionary.Remove(vertex.Name);
         }
 
-        public void LinkVertex(Vertex firstVertex, Vertex secondVertex, double? cost = null)
+        /// <summary>
+        /// Links the first vertex to the second vertex with the provided cost.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Thrown when a link between the two provided vertices already exists in the graph.</exception>
+        public void AddEdge(Vertex firstVertex, Vertex secondVertex, double cost)
         {
-            // Connect Vertex start to Vertex end with cost.
+            var existingEdge = firstVertex.Edges.FirstOrDefault(x => x.SecondVertex.Equals(secondVertex));
+            if (existingEdge != null)
+            {
+                throw new InvalidOperationException($"A link between vertex '{firstVertex.Name}' and and vertex '{secondVertex.Name} already exists.'");
+            }
+
+            firstVertex.Edges.AddLast(new Edge(secondVertex, cost));
         }
 
-        public void UnlinkVertex(Vertex firstVertex, Vertex secondVertex)
+        /// <summary>
+        /// Unlinks the first vertex from the second vertex.
+        /// The first vertex will not be removed if it no longer has any edges, 
+        /// use <see cref="RemoveVertex(Vertex)"/> or <see cref="RemoveVertex(string)"/> instead.
+        /// </summary>
+        /// <returns>True if removing was succesful, false if it wasn't.</returns>
+        public bool RemoveEdge(string firstVertexName, string secondVertexName)
         {
-            // Unlink the vertex, removing it if it no longer has any connections.
+            var firstVertex = _vertexDictionary[firstVertexName];
+            var secondVertex = _vertexDictionary[secondVertexName];
+
+            var linkedVertex = firstVertex.Edges.FirstOrDefault(x => x.SecondVertex.Equals(secondVertex));
+            return firstVertex.Edges.Remove(linkedVertex);
         }
 
         #endregion
