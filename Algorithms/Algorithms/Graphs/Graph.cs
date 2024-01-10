@@ -6,6 +6,46 @@ namespace Algorithms.Graphs
     {
         private Dictionary<string, Vertex> _vertexDictionary = new();
 
+        #region Algorithms
+
+        public void GetUnweightedShortestPath(Vertex start, Vertex destination)
+        {
+            // ???
+        }
+
+        public void GetWeightedShortestPath(Vertex start, Vertex destination)
+        {
+            // ???
+        }
+
+        #endregion
+
+        #region CRUD Action 
+
+        public void AddVertex(Vertex vertex, IEnumerable<Vertex> links)
+        {
+            // Retrieve the vertex by name and then add links between that and the other vertices.
+        }
+
+        public void RemoveVertex(Vertex vertex)
+        {
+            // Remove the vertex, unlinking it from the rest.
+        }
+
+        public void LinkVertex(Vertex firstVertex, Vertex secondVertex, double? cost = null)
+        {
+            // Connect Vertex start to Vertex end with cost.
+        }
+
+        public void UnlinkVertex(Vertex firstVertex, Vertex secondVertex)
+        {
+            // Unlink the vertex, removing it if it no longer has any connections.
+        }
+
+        #endregion
+
+        #region Initiating
+
         public void InitiateLineList(int[,] lineList)
         {
             for (int i = 0; i < lineList.GetLength(0); i++)
@@ -14,7 +54,6 @@ namespace Algorithms.Graphs
                 Vertex vertex = CreateAndRetrieveKey(key);
                 var newVertex = new Vertex($"vertex-{lineList[i, 1]}");
 
-                // if our lenght is 3, we have a valid weight.
                 var cost = 0;
                 if (lineList.GetLength(1) == 3)
                 {
@@ -82,6 +121,10 @@ namespace Algorithms.Graphs
             return _vertexDictionary[key];
         }
 
+        #endregion
+
+        #region Miscellaneous methods
+
         public void DrawGraph()
         {
             foreach (var keyValuePair in _vertexDictionary)
@@ -95,8 +138,11 @@ namespace Algorithms.Graphs
                 sb.Append(" -|");
                 Console.WriteLine(sb.ToString());
             }
+
             // New line for the next possible drawing.
             Console.WriteLine();
         }
+
+        #endregion
     }
 }
