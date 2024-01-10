@@ -2,22 +2,22 @@
 {
     public class Vertex
     {
-        private string _name;
-        private LinkedList<Edge> _edges = new();
+        public string Name;
+        public LinkedList<Edge> Edges = new();
 
         private double _distance;
         private Vertex? _previousVertex;
 
         public Vertex(string name)
         {
-            _name = name;
+            Name = name;
             _distance = double.PositiveInfinity;
         }
 
         public void AddEdge(Vertex nextVertex, double cost)
         {
             var edge = new Edge(nextVertex, cost);
-            _edges.AddLast(edge);
+            Edges.AddLast(edge);
         }
     }
 }

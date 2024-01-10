@@ -4,6 +4,7 @@ using Algorithms.BinarySearch.Benchmarks;
 using Algorithms.Deque.Benchmarks;
 using Algorithms.DoublyLinkedList.Benchmarks;
 using Algorithms.DynamicArrays.Benchmarks;
+using Algorithms.Graphs;
 using Algorithms.Hashtable.Benchmarks;
 using Algorithms.InsertionSort.Benchmarks;
 using Algorithms.JsonData;
@@ -42,9 +43,50 @@ public class Program
 
         //Run_HashtableBenchmarks();
 
-        var graphData = JsonConstants.ReadDataSetGraphing();
-        var test = JsonConvert.DeserializeObject<GraphData>(graphData);
+        DrawGraphs();
+    }
+
+    private static void DrawGraphs()
+    {
+        var deserializedGraphData = JsonConvert.DeserializeObject<GraphData>(JsonConstants.ReadDataSetGraphing()) ?? throw new Exception("Graph data is null");
+        Graph graph;
+
+        // Line lists;
+        graph = new Graph();
+        graph.InitiateLineList(deserializedGraphData.Lijnlijst);
+        Console.WriteLine("-== Line List ==-");
+        graph.DrawGraph();
+
+        graph = new Graph();
+        graph.InitiateLineList(deserializedGraphData.LijnlijstGewogen);
+        Console.WriteLine("-== Weighted Line List ==-");
+        graph.DrawGraph();
         Console.WriteLine();
+        Console.WriteLine();
+
+        // Connection lists
+        graph = new Graph();
+        graph.InitiateConnectionList(deserializedGraphData.Verbindingslijst);
+        Console.WriteLine("-== Connection List ==-");
+        graph.DrawGraph();
+
+        graph = new Graph();
+        graph.InitiateConnectionList(deserializedGraphData.VerbindingslijstGewogen);
+        Console.WriteLine("-== Weighted Connection List ==-");
+        graph.DrawGraph();
+        Console.WriteLine();
+        Console.WriteLine();
+
+        // Matrix lists
+        graph = new Graph();
+        graph.InitiateMatrixList(deserializedGraphData.Verbindingsmatrix);
+        Console.WriteLine("-== Matrix List ==-");
+        graph.DrawGraph();
+
+        graph = new Graph();
+        graph.InitiateMatrixList(deserializedGraphData.VerbindingsmatrixGewogen);
+        Console.WriteLine("-== Weighted Matrix List ==-");
+        graph.DrawGraph();
     }
 
     private static void Run_DynamicArrayBenchmarks()

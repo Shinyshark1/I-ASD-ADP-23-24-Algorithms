@@ -36,7 +36,7 @@ namespace Algorithms.JsonData.Grafen.Models
         /// TODO: Explain how this works.
         /// </summary>
         [JsonProperty("verbindingsmatrix")]
-        public List<List<int>> Verbindingsmatrix { get; set; }
+        public int[][] Verbindingsmatrix { get; set; }
         #endregion
 
 
@@ -45,10 +45,10 @@ namespace Algorithms.JsonData.Grafen.Models
         public int[,] LijnlijstGewogen { get; set; }
 
         [JsonProperty("verbindingslijst_gewogen")]
-        public List<List<List<int>>> VerbindingslijstGewogen { get; set; }
+        public int[][][] VerbindingslijstGewogen { get; set; }
 
         [JsonProperty("verbindingsmatrix_gewogen")]
-        public List<List<int>> VerbindingsmatrixGewogen { get; set; }
+        public int[][] VerbindingsmatrixGewogen { get; set; }
         #endregion
     }
 }
