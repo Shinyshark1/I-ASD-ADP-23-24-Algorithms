@@ -5,6 +5,7 @@
         public string Name;
         public LinkedList<Edge> Edges = new();
 
+        //TODO: Make the unweighted and weighted algorithms with these properties.
         private double _distance;
         private Vertex? _previousVertex;
 
