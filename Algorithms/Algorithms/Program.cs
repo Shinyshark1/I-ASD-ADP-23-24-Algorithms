@@ -43,7 +43,88 @@ public class Program
 
         //Run_HashtableBenchmarks();
 
-        DrawGraphs();
+        //DrawGraphs();
+
+        // This is test data to represent the graph used in this video:
+        // https://www.youtube.com/watch?v=pVfj6mxhdMw
+        string jsonData = @"
+        {
+            ""linelist_weighted"": 
+            [
+                [
+                    [
+                        1,
+                        6
+                    ],
+                    [
+                        3,
+                        1
+                    ]
+                ],
+                [
+                    [
+                        0,
+                        6
+                    ],
+                    [
+                        2,
+                        5
+                    ],
+                    [
+                        3,
+                        2
+                    ],
+                    [
+                        4,
+                        2
+                    ]
+                ],
+                [
+                    [
+                        1,
+                        5
+                    ],
+                    [
+                        4,
+                        5
+                    ]
+                ],
+                [
+                    [
+                        0,
+                        1
+                    ],
+                    [
+                        1,
+                        2
+                    ],
+                    [
+                        4,
+                        1
+                    ]
+                ],
+                [
+                    [
+                        1,
+                        2
+                    ],
+                    [
+                        2,
+                        5
+                    ],
+                    [
+                        3,
+                        1
+                    ]
+                ]
+            ]
+        }";
+
+
+        var graph = new Graph();
+        var testData = JsonConvert.DeserializeObject<TestList>(jsonData) ?? throw new Exception();
+        graph.InitiateConnectionList(testData.LineListWeighted);
+        var result = graph.Dijkstra("V0");
     }
 
     private static void DrawGraphs()

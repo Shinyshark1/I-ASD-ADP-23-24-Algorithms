@@ -8,14 +8,60 @@ namespace Algorithms.Graphs
 
         #region Algorithms
 
-        public void GetUnweightedShortestPath(Vertex start, Vertex destination)
-        {
-            // ???
-        }
+        // TODO: We still have to find the unweighted shortest path.
 
-        public void GetWeightedShortestPath(Vertex start, Vertex destination)
+        public Dictionary<string, Vertex> Dijkstra(string sourceVertexName)
         {
-            // ???
+            if (_vertexDictionary.ContainsKey(sourceVertexName) == false)
+            {
+                throw new InvalidOperationException($"Vertex '{sourceVertexName}' does not exist in the Graph.");
+            }
+
+            // We set our starting vertex from infinity to 0 so that we can begin.
+            var startingVertex = _vertexDictionary[sourceVertexName];
+            startingVertex.Distance = 0;
+
+            var visitedVertices = new List<string>();
+
+            var priorityQueue = new PriorityQueue<Vertex, double>();
+            priorityQueue.Enqueue(startingVertex, 0);
+            while (priorityQueue.Count > 0)
+            {
+                var currentVertex = priorityQueue.Dequeue();
+                foreach (var edge in currentVertex.Edges.OrderBy(x => x.Cost))
+                {
+                    // If we already visited this edge, we should skip it.
+                    if (visitedVertices.Contains(edge.SecondVertex.Name))
+                    {
+                        continue;
+                    }
+
+                    var comparisonVertex = _vertexDictionary[edge.SecondVertex.Name];
+                    var totalDistance = currentVertex.Distance + edge.Cost;
+                    if (totalDistance < comparisonVertex.Distance)
+                    {
+                        comparisonVertex.Distance = totalDistance;
+                        comparisonVertex.PreviousVertex = currentVertex;
+                    }
+                }
+
+                visitedVertices.Add(currentVertex.Name);
+
+                // We have to find the next unvisited vertex with the lowest distance.
+                // That vertex has to be queued up for our next operation.
+                // TODO: It is also possible to do this by enqueuing everything and updating the values accordingly.
+                var nextItem = _vertexDictionary.Values
+                    .Where(x => visitedVertices.Contains(x.Name) == false)
+                    .OrderBy(x => x.Distance)
+                    .FirstOrDefault();
+
+                if (nextItem != null)
+                {
+                    priorityQueue.Enqueue(nextItem, nextItem.Distance);
+                }
+            }
+
+            return _vertexDictionary;
         }
 
         #endregion

@@ -1,18 +1,27 @@
 ﻿namespace Algorithms.Graphs
 {
+    /// <summary>
+    /// Vertex
+    /// </summary>
     public class Vertex
     {
         public string Name;
         public LinkedList<Edge> Edges = new();
 
-        //TODO: Make the unweighted and weighted algorithms with these properties.
-        private double _distance;
-        private Vertex? _previousVertex;
+        /// <summary>
+        /// Shortest distance from A
+        /// </summary>
+        public double Distance;
+
+        /// <summary>
+        /// Previous vertex
+        /// </summary>
+        public Vertex? PreviousVertex = null;
 
         public Vertex(string name)
         {
             Name = name;
-            _distance = double.PositiveInfinity;
+            Distance = double.PositiveInfinity;
         }
 
         public void AddEdge(Vertex nextVertex, double cost)
