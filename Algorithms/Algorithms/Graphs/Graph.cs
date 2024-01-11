@@ -42,6 +42,9 @@ namespace Algorithms.Graphs
                     {
                         comparisonVertex.Distance = totalDistance;
                         comparisonVertex.PreviousVertex = currentVertex;
+                        // TODO: It is also possible enqueue items here and update them if they are already in the queue.
+                        // That way we ensure that the values are properly represented.
+                        // The issue lies in updating a priority, it is not so straightforward.
                     }
                 }
 
@@ -49,7 +52,6 @@ namespace Algorithms.Graphs
 
                 // We have to find the next unvisited vertex with the lowest distance.
                 // That vertex has to be queued up for our next operation.
-                // TODO: It is also possible to do this by enqueuing everything and updating the values accordingly.
                 var nextItem = _vertexDictionary.Values
                     .Where(x => visitedVertices.Contains(x.Name) == false)
                     .OrderBy(x => x.Distance)
