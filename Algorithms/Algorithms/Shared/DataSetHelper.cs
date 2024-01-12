@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Algorithms.Shared
 {
@@ -89,8 +90,47 @@ namespace Algorithms.Shared
                 var randomKey = RandomString(8);
                 dictionary.Add(randomKey, _random.Next(size));
             }
-
             return dictionary;
+        }
+
+        /// <summary>
+        /// Creates a line list for graphing purposes.
+        /// </summary>
+        /// <param name="amountOfVertices">How many vertices should be made.</param>
+        /// <param name="minimumEdges">The amount of edges a vertex must have at the very least.</param>
+        /// <param name="maximumEdges">The amount of edges a vertex may have at the most.</param>
+        /// <param name="maximumCost">The maximum cost per node. The cost is randomly determined between 1 and this number. Leave this null if a cost is not desired.</param>
+        /// <returns></returns>
+        public static List<List<int>> CreateRandomLineList(int amountOfVertices, int minimumEdges, int maximumEdges, int? maximumCost = null)
+        {
+            var random = new Random();
+            var list = new List<List<int>>();
+
+            for (int i = 0; i < amountOfVertices; i++)
+            {
+                var currentConnections = new List<int>();
+                var amountOfEdges = random.Next(minimumEdges, maximumEdges);
+                for (int j = 0; j < amountOfEdges; j++)
+                {
+                    var connection = random.Next(amountOfVertices);
+                    while (connection == i || currentConnections.Contains(connection))
+                    {
+                        connection = random.Next(amountOfVertices);
+                    }
+
+                    currentConnections.Add(connection);
+                    if(maximumCost is int convertedCost)
+                    {
+                        list.Add(new List<int> { i, connection, random.Next(1, convertedCost) });
+                    }
+                    else
+                    {
+                        list.Add(new List<int> { i, connection });
+                    }
+                }
+            }
+
+            return list;
         }
     }
 }
