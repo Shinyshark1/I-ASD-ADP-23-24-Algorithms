@@ -58,7 +58,7 @@ public class Program
                     ],
                     [
                         3,
-                        1
+                        -2
                     ]
                 ],
                 [

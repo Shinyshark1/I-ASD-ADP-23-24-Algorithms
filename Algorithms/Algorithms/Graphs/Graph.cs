@@ -17,6 +17,11 @@ namespace Algorithms.Graphs
                 throw new InvalidOperationException($"Vertex '{sourceVertexName}' does not exist in the Graph.");
             }
 
+            if(_vertexDictionary.Values.SelectMany(x => x.Edges).Any(e => e.Cost < 0))
+            {
+                throw new Exception("The Dijkstra algorithm does not support negative costs between nodes.");
+            }
+
             // We set our starting vertex from infinity to 0 so that we can begin.
             var startingVertex = _vertexDictionary[sourceVertexName];
             startingVertex.Distance = 0;
