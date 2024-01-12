@@ -8,7 +8,38 @@ namespace Algorithms.Graphs
 
         #region Algorithms
 
-        // TODO: We still have to find the unweighted shortest path.
+        public Dictionary<string, Vertex> GetShortestUnweightedPath(string sourceVertexName)
+        {
+            if (_vertexDictionary.ContainsKey(sourceVertexName) == false)
+            {
+                throw new InvalidOperationException($"Vertex '{sourceVertexName}' does not exist in the Graph.");
+            }
+
+            ResetVertexDictionary();
+
+            var startingVertex = _vertexDictionary[sourceVertexName];
+            startingVertex.Distance = 0;
+
+            Queue<Vertex> queue = new Queue<Vertex>();
+            queue.Enqueue(startingVertex);
+
+            while(queue.Count > 0)
+            {
+                var vertex = queue.Dequeue();
+                foreach (var edge in vertex.Edges)
+                {
+                    var destinationVertex = edge.SecondVertex;
+                    if(destinationVertex.Distance == double.PositiveInfinity)
+                    {
+                        destinationVertex.Distance = vertex.Distance + 1;
+                        destinationVertex.PreviousVertex = vertex;
+                        queue.Enqueue(destinationVertex);
+                    }
+                }
+            }
+
+            return _vertexDictionary;
+        }
 
         public Dictionary<string, Vertex> Dijkstra(string sourceVertexName)
         {
@@ -21,6 +52,8 @@ namespace Algorithms.Graphs
             {
                 throw new Exception("The Dijkstra algorithm does not support negative costs between nodes.");
             }
+
+            ResetVertexDictionary();
 
             // We set our starting vertex from infinity to 0 so that we can begin.
             var startingVertex = _vertexDictionary[sourceVertexName];
@@ -47,9 +80,6 @@ namespace Algorithms.Graphs
                     {
                         comparisonVertex.Distance = totalDistance;
                         comparisonVertex.PreviousVertex = currentVertex;
-                        // TODO: It is also possible enqueue items here and update them if they are already in the queue.
-                        // That way we ensure that the values are properly represented.
-                        // The issue lies in updating a priority, it is not so straightforward.
                     }
                 }
 
@@ -167,14 +197,17 @@ namespace Algorithms.Graphs
             {
                 var key = $"V{lineList[i, 0]}";
                 Vertex vertex = CreateAndRetrieveKey(key);
-                var newVertex = new Vertex($"V{lineList[i, 1]}");
+
+                var connectedVertexKey = $"V{lineList[i, 1]}";
+                Vertex connectedVertex = CreateAndRetrieveKey(connectedVertexKey);
 
                 var cost = 0;
                 if (lineList.GetLength(1) == 3)
                 {
                     cost = lineList[i, 2];
                 }
-                vertex.AddEdge(newVertex, cost);
+
+                vertex.AddEdge(connectedVertex, cost);
             }
         }
 
@@ -183,11 +216,12 @@ namespace Algorithms.Graphs
             for (int i = 0; i < connectionList.Length; i++)
             {
                 var key = $"V{i}";
-                var vertex = CreateAndRetrieveKey(key);
+                Vertex vertex = CreateAndRetrieveKey(key);
                 for (int j = 0; j < connectionList[i].Length; j++)
                 {
-                    var newVertex = new Vertex($"V{connectionList[i][j]}");
-                    vertex.AddEdge(newVertex, 0);
+                    var connectedVertexKey = $"V{connectionList[i][j]}";
+                    Vertex connectedVertex = CreateAndRetrieveKey(connectedVertexKey);
+                    vertex.AddEdge(connectedVertex, 0);
                 }
             }
         }
@@ -197,31 +231,33 @@ namespace Algorithms.Graphs
             for (int i = 0; i < connectionList.Length; i++)
             {
                 var key = $"V{i}";
-                var vertex = CreateAndRetrieveKey(key);
+                Vertex vertex = CreateAndRetrieveKey(key);
                 for (int j = 0; j < connectionList[i].Length; j++)
                 {
-                    var newVertex = new Vertex($"V{connectionList[i][j][0]}");
-                    vertex.AddEdge(newVertex, connectionList[i][j][1]);
+                    var connectedVertexKey = $"V{connectionList[i][j][0]}";
+                    Vertex connectedVertex = CreateAndRetrieveKey(connectedVertexKey);
+                    vertex.AddEdge(connectedVertex, connectionList[i][j][1]);
                 }
             }
         }
 
         public void InitiateMatrixList(int[][] matrixList)
         {
-            for (int i = 0; i < matrixList.GetLength(0); i++)
+            for (int i = 0; i < matrixList.Length; i++)
             {
                 var key = $"V{i}";
-                var vertex = CreateAndRetrieveKey(key);
+                Vertex vertex = CreateAndRetrieveKey(key);
                 for (int j = 0; j < matrixList[i].Length; j++)
                 {
                     var cost = matrixList[i][j];
-                    if (cost == 0)
+                    if (cost == 0 && i != j)
                     {
                         continue;
                     }
 
-                    var newVertex = new Vertex($"V{j}");
-                    vertex.AddEdge(newVertex, cost);
+                    var connectedVertexKey = $"V{j}";
+                    Vertex connectedVertex = CreateAndRetrieveKey(connectedVertexKey);
+                    vertex.AddEdge(connectedVertex, matrixList[i][j]);
                 }
             }
         }
@@ -239,6 +275,15 @@ namespace Algorithms.Graphs
         #endregion
 
         #region Miscellaneous methods
+
+        private void ResetVertexDictionary()
+        {
+            foreach (var vertex in _vertexDictionary.Values)
+            {
+                vertex.Distance = double.PositiveInfinity;
+                vertex.PreviousVertex = null;
+            }
+        }
 
         public void DrawGraph()
         {
