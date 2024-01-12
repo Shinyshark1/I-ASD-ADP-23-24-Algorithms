@@ -601,5 +601,21 @@ public class Program
             GraphBenchmarks.AddEdge_Benchmark(value);
             Console.WriteLine();
         }
+
+        benchmarkValues = new List<int> { 10, 100, 1000, 2500 };
+        BenchmarkHelper.StartBenchmark("GetShortestUnweightedPath");
+        foreach (int value in benchmarkValues)
+        {
+            GraphBenchmarks.GetShortestUnweightedPath_Benchmark(value);
+            Console.WriteLine();
+        }
+
+        benchmarkValues = new List<int> { 10, 100, 1000, 2500 };
+        BenchmarkHelper.StartBenchmark("GetShortestWeightedPath");
+        foreach (int value in benchmarkValues)
+        {
+            GraphBenchmarks.GetShortestWeightedPath_Benchmark(value);
+            Console.WriteLine();
+        }
     }
 }

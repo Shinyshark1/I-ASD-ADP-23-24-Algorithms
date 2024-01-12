@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Algorithms.Shared;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -77,8 +79,47 @@ namespace Algorithms.Graphs.Benchmarks
             Console.WriteLine($"Size: {size} - Elapsed time: {sw.Elapsed}");
         }
 
-        // Unweighted
 
-        // Weighted
+        public static void GetShortestUnweightedPath_Benchmark(int size)
+        {
+            var minimumEdge = (int)Math.Ceiling(size * 0.1);
+            var maximumEdge = (int)Math.Ceiling(size * 0.3);   
+
+            var lineListJson = JsonConvert.SerializeObject(DataSetHelper.CreateRandomLineList(size, minimumEdge, maximumEdge));
+            var lineList = JsonConvert.DeserializeObject<int[,]>(lineListJson);
+
+            var graph = new Graph();
+            graph.InitiateLineList(lineList);
+
+            Console.WriteLine($"Starting GetShortestUnweightedPath benchmark with {size} items.");
+            var sw = new Stopwatch();
+            sw.Start();
+
+            graph.GetShortestWeightedPath("0");
+
+            sw.Stop();
+            Console.WriteLine($"Size: {size} - Elapsed time: {sw.Elapsed}");
+        }
+
+        public static void GetShortestWeightedPath_Benchmark(int size)
+        {
+            var minimumEdge = (int)Math.Ceiling(size * 0.1);
+            var maximumEdge = (int)Math.Ceiling(size * 0.3);
+
+            var lineListJson = JsonConvert.SerializeObject(DataSetHelper.CreateRandomLineList(size, minimumEdge, maximumEdge, 50));
+            var lineList = JsonConvert.DeserializeObject<int[,]>(lineListJson);
+
+            var graph = new Graph();
+            graph.InitiateLineList(lineList);
+
+            Console.WriteLine($"Starting GetShortestUnweightedPath benchmark with {size} items.");
+            var sw = new Stopwatch();
+            sw.Start();
+
+            graph.GetShortestWeightedPath("0");
+
+            sw.Stop();
+            Console.WriteLine($"Size: {size} - Elapsed time: {sw.Elapsed}");
+        }
     }
 }
