@@ -44,93 +44,18 @@ public class Program
 
         //Run_HashtableBenchmarks();
 
+        //Run_GraphBenchmarks();
+        
         //DrawGraphs();
 
-        // This is test data to represent the graph used in this video:
-        // https://www.youtube.com/watch?v=pVfj6mxhdMw
-        string jsonData = @"
-        {
-            ""linelist_weighted"": 
-            [
-                [
-                    [
-                        1,
-                        6
-                    ],
-                    [
-                        3,
-                        1
-                    ]
-                ],
-                [
-                    [
-                        0,
-                        6
-                    ],
-                    [
-                        2,
-                        5
-                    ],
-                    [
-                        3,
-                        2
-                    ],
-                    [
-                        4,
-                        2
-                    ]
-                ],
-                [
-                    [
-                        1,
-                        5
-                    ],
-                    [
-                        4,
-                        5
-                    ]
-                ],
-                [
-                    [
-                        0,
-                        1
-                    ],
-                    [
-                        1,
-                        2
-                    ],
-                    [
-                        4,
-                        1
-                    ]
-                ],
-                [
-                    [
-                        1,
-                        2
-                    ],
-                    [
-                        2,
-                        5
-                    ],
-                    [
-                        3,
-                        1
-                    ]
-                ]
-            ]
-        }";
-
-        var graph = new Graph();
-        graph.InitiateConnectionList(JsonConvert.DeserializeObject<int[][][]>(jsonData) ?? throw new Exception());
-        var result = graph.GetShortestWeightedPath("V0");
+        //var graph = new Graph();
+        //graph.InitiateConnectionList(JsonConvert.DeserializeObject<int[][][]>(JsonConstants.WeightedLineList) ?? throw new Exception());
+        //var result = graph.GetShortestWeightedPath("0");
 
         //var graph = new Graph();
         //var deserializedGraphData = JsonConvert.DeserializeObject<GraphData>(JsonConstants.ReadDataSetGraphing()) ?? throw new Exception("Graph data is null");
         //graph.InitiateConnectionList(deserializedGraphData.Verbindingslijst);
-        //graph.GetShortestUnweightedPath("V0");
-
-        Run_GraphBenchmarks();
+        //graph.GetShortestUnweightedPath("0");
     }
 
     private static void DrawGraphs()
