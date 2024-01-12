@@ -125,6 +125,7 @@ public class Program
         var testData = JsonConvert.DeserializeObject<TestList>(jsonData) ?? throw new Exception();
         graph.InitiateConnectionList(testData.LineListWeighted);
         var result = graph.Dijkstra("V0");
+        Run_GraphBenchmarks();
     }
 
     private static void DrawGraphs()
@@ -566,6 +567,33 @@ public class Program
         foreach (int value in benchmarkValues)
         {
             HashtableBenchmarks.Update_Benchmark(value);
+            Console.WriteLine();
+        }
+    }
+
+    private static void Run_GraphBenchmarks()
+    {
+        var benchmarkValues = new List<int> { 10, 100, 1000, 10000 };
+        BenchmarkHelper.StartBenchmark("Add Vertex");
+        foreach (int value in benchmarkValues)
+        {
+            GraphBenchmarks.AddVertex_Benchmark(value);
+            Console.WriteLine();
+        }
+
+        benchmarkValues = new List<int> { 10, 100, 1000, 10000 };
+        BenchmarkHelper.StartBenchmark("Remove Vertex");
+        foreach (int value in benchmarkValues)
+        {
+            GraphBenchmarks.RemoveVertex_Benchmark(value);
+            Console.WriteLine();
+        }
+
+        benchmarkValues = new List<int> { 10, 100, 1000, 10000 };
+        BenchmarkHelper.StartBenchmark("Add Edge");
+        foreach (int value in benchmarkValues)
+        {
+            GraphBenchmarks.AddEdge_Benchmark(value);
             Console.WriteLine();
         }
     }

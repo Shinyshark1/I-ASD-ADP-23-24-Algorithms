@@ -75,7 +75,6 @@ namespace Algorithms.Graphs
                     }
 
                     var comparisonVertex = edge.SecondVertex;
-                    //var comparisonVertex = _vertexDictionary[edge.SecondVertex.Name];
                     var totalDistance = currentVertex.Distance + edge.Cost;
                     if (totalDistance < comparisonVertex.Distance)
                     {
@@ -105,6 +104,12 @@ namespace Algorithms.Graphs
         #endregion
 
         #region CRUD Action 
+
+        public Vertex? GetVertex(string vertexName)
+        {
+            _vertexDictionary.TryGetValue(vertexName, out Vertex? vertex);
+            return vertex;
+        }
 
         /// <summary>
         /// Adds the provided vertex to the <see cref="Graph"/>.
