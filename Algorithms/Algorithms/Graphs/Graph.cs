@@ -201,10 +201,10 @@ namespace Algorithms.Graphs
         {
             for (int i = 0; i < lineList.GetLength(0); i++)
             {
-                var key = $"V{lineList[i, 0]}";
+                var key = $"{lineList[i, 0]}";
                 Vertex vertex = CreateAndRetrieveKey(key);
 
-                var connectedVertexKey = $"V{lineList[i, 1]}";
+                var connectedVertexKey = $"{lineList[i, 1]}";
                 Vertex connectedVertex = CreateAndRetrieveKey(connectedVertexKey);
 
                 var cost = 0;
@@ -221,11 +221,11 @@ namespace Algorithms.Graphs
         {
             for (int i = 0; i < connectionList.Length; i++)
             {
-                var key = $"V{i}";
+                var key = $"{i}";
                 Vertex vertex = CreateAndRetrieveKey(key);
                 for (int j = 0; j < connectionList[i].Length; j++)
                 {
-                    var connectedVertexKey = $"V{connectionList[i][j]}";
+                    var connectedVertexKey = $"{connectionList[i][j]}";
                     Vertex connectedVertex = CreateAndRetrieveKey(connectedVertexKey);
                     vertex.AddEdge(connectedVertex, 0);
                 }
@@ -236,11 +236,11 @@ namespace Algorithms.Graphs
         {
             for (int i = 0; i < connectionList.Length; i++)
             {
-                var key = $"V{i}";
+                var key = $"{i}";
                 Vertex vertex = CreateAndRetrieveKey(key);
                 for (int j = 0; j < connectionList[i].Length; j++)
                 {
-                    var connectedVertexKey = $"V{connectionList[i][j][0]}";
+                    var connectedVertexKey = $"{connectionList[i][j][0]}";
                     Vertex connectedVertex = CreateAndRetrieveKey(connectedVertexKey);
                     vertex.AddEdge(connectedVertex, connectionList[i][j][1]);
                 }
@@ -251,7 +251,7 @@ namespace Algorithms.Graphs
         {
             for (int i = 0; i < matrixList.Length; i++)
             {
-                var key = $"V{i}";
+                var key = $"{i}";
                 Vertex vertex = CreateAndRetrieveKey(key);
                 for (int j = 0; j < matrixList[i].Length; j++)
                 {
@@ -261,7 +261,7 @@ namespace Algorithms.Graphs
                         continue;
                     }
 
-                    var connectedVertexKey = $"V{j}";
+                    var connectedVertexKey = $"{j}";
                     Vertex connectedVertex = CreateAndRetrieveKey(connectedVertexKey);
                     vertex.AddEdge(connectedVertex, matrixList[i][j]);
                 }
