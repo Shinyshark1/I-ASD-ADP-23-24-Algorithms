@@ -5,6 +5,7 @@ using Algorithms.Deque.Benchmarks;
 using Algorithms.DoublyLinkedList.Benchmarks;
 using Algorithms.DynamicArrays.Benchmarks;
 using Algorithms.Graphs;
+using Algorithms.Graphs.Benchmarks;
 using Algorithms.Hashtable.Benchmarks;
 using Algorithms.InsertionSort.Benchmarks;
 using Algorithms.JsonData;
@@ -58,7 +59,7 @@ public class Program
                     ],
                     [
                         3,
-                        -2
+                        1
                     ]
                 ],
                 [
@@ -120,11 +121,15 @@ public class Program
             ]
         }";
 
-
         var graph = new Graph();
-        var testData = JsonConvert.DeserializeObject<TestList>(jsonData) ?? throw new Exception();
-        graph.InitiateConnectionList(testData.LineListWeighted);
-        var result = graph.Dijkstra("V0");
+        graph.InitiateConnectionList(JsonConvert.DeserializeObject<int[][][]>(jsonData) ?? throw new Exception());
+        var result = graph.GetShortestWeightedPath("V0");
+
+        //var graph = new Graph();
+        //var deserializedGraphData = JsonConvert.DeserializeObject<GraphData>(JsonConstants.ReadDataSetGraphing()) ?? throw new Exception("Graph data is null");
+        //graph.InitiateConnectionList(deserializedGraphData.Verbindingslijst);
+        //graph.GetShortestUnweightedPath("V0");
+
         Run_GraphBenchmarks();
     }
 
