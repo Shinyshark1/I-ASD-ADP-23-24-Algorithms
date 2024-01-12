@@ -41,7 +41,7 @@ namespace Algorithms.Graphs
             return _vertexDictionary;
         }
 
-        public Dictionary<string, Vertex> Dijkstra(string sourceVertexName)
+        public Dictionary<string, Vertex> GetShortestWeightedPath(string sourceVertexName)
         {
             if (_vertexDictionary.ContainsKey(sourceVertexName) == false)
             {
@@ -74,7 +74,8 @@ namespace Algorithms.Graphs
                         continue;
                     }
 
-                    var comparisonVertex = _vertexDictionary[edge.SecondVertex.Name];
+                    var comparisonVertex = edge.SecondVertex;
+                    //var comparisonVertex = _vertexDictionary[edge.SecondVertex.Name];
                     var totalDistance = currentVertex.Distance + edge.Cost;
                     if (totalDistance < comparisonVertex.Distance)
                     {
