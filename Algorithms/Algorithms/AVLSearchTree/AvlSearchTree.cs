@@ -47,11 +47,29 @@ namespace Algorithms.AVLSearchTree
             return null;
         }
 
-        public TreeNode FindMaximum()
+        public TreeNode? FindMaximum()
         {
-            // In order | L -> N -> R
-            throw new NotImplementedException();
+            return RecursiveFindMaximum(Root);
         }
+
+        public TreeNode? RecursiveFindMaximum(TreeNode? node)
+        {
+            // If our Root is null, this would be null.
+            if (node == null)
+            {
+                return null;
+            }
+
+            // If there are no more nodes on the right, this node is the highest one.
+            if (node.Right == null)
+            {
+                return node;
+            }
+
+            // Recursion!!!!
+            return RecursiveFindMaximum(node.Right);
+        }
+
 
         public TreeNode? FindMinimum()
         {

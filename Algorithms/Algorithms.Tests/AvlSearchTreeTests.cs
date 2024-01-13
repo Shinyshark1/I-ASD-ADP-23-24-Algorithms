@@ -73,5 +73,53 @@ namespace Algorithms.Tests
             Assert.Equal(40, node3!.Value);
             Assert.Null(nullNode);
         }
+
+        [Fact]
+        public void FindMinimum_FindsTheLowestNode()
+        {
+            // Arrange
+            var AvlTree = new AvlSearchTree();
+            AvlTree.Insert(50);
+            AvlTree.Insert(25);
+            AvlTree.Insert(75);
+            AvlTree.Insert(40);
+            AvlTree.Insert(90);
+            AvlTree.Insert(104);
+            AvlTree.Insert(23);
+            AvlTree.Insert(7);
+            AvlTree.Insert(3);
+            AvlTree.Insert(80);
+            AvlTree.Insert(64);
+
+            // Act
+            var lowestNode = AvlTree.FindMinimum();
+
+            // Assert
+            Assert.Equal(3, lowestNode.Value);
+        }
+
+        [Fact]
+        public void FindMaximum_FindsTheHighestNode()
+        {
+            // Arrange
+            var AvlTree = new AvlSearchTree();
+            AvlTree.Insert(50);
+            AvlTree.Insert(25);
+            AvlTree.Insert(75);
+            AvlTree.Insert(40);
+            AvlTree.Insert(90);
+            AvlTree.Insert(104);
+            AvlTree.Insert(23);
+            AvlTree.Insert(7);
+            AvlTree.Insert(3);
+            AvlTree.Insert(80);
+            AvlTree.Insert(64);
+
+            // Act
+            var highestNode = AvlTree.FindMaximum();
+
+            // Assert
+            Assert.Equal(104, highestNode.Value);
+        }
     }
 }
