@@ -2,13 +2,13 @@
 {
     public class TreeNode
     {
-        public TreeNode(int value)
+        public TreeNode(int value, int height)
         {
             Key = value;
             Value = value;
             Left = null;
             Right = null;
-            Height = 1;
+            Height = height;
         }
 
         // Normally we'd have a key AND a value but we only need to insert ints here.
