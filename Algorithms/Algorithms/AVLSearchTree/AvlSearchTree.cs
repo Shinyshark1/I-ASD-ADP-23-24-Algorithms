@@ -13,10 +13,38 @@ namespace Algorithms.AVLSearchTree
             Root = null;
         }
 
-        public TreeNode Find(int value)
+        /// <summary>
+        /// Attempts to find a node with the specified value using in-order (L -> N -> R) traversal.
+        /// </summary>
+        /// <returns>The <see cref="TreeNode"/> with the specified value or <see langword="null"/> if none can be found.</returns>
+        public TreeNode? Find(int value)
         {
+            var node = RecursiveFind(Root, value);
+            return node;
             // In order | L -> N -> R
-            throw new NotImplementedException();
+        }
+
+        private TreeNode? RecursiveFind(TreeNode? currentNode, int value)
+        {
+            if (currentNode == null)
+            {
+                return null;
+            }
+            else if (value < currentNode.Value) //L
+            {
+                return RecursiveFind(currentNode.Left, value);
+            }
+            else if (currentNode.Value == value) //N
+            {
+                return currentNode;
+            }
+            else if (value > currentNode.Value) //R
+            {
+                return RecursiveFind(currentNode.Right, value);
+            }
+
+            // This is unreachable as all cases are covered, but I prefer not to use else to assume the right hand side for clarity of code.
+            return null;
         }
 
         public TreeNode FindMaximum()
@@ -36,7 +64,7 @@ namespace Algorithms.AVLSearchTree
             // TODO: Rotate after mutation
             if (Root == null)
             {
-                Root = new TreeNode(value);
+                Root = new TreeNode(value, 1);
                 return;
             }
 
@@ -57,7 +85,8 @@ namespace Algorithms.AVLSearchTree
                 // If left is null, we insert here and stop.
                 if (currentNode.Left == null)
                 {
-                    currentNode.Left = new TreeNode(value);
+                    // the height of this node is the height of the previous node + 1
+                    currentNode.Left = new TreeNode(value, currentNode.Height + 1);
                     return;
                 }
 
@@ -69,7 +98,7 @@ namespace Algorithms.AVLSearchTree
                 // If right is null, we insert here and stop.
                 if (currentNode.Right == null)
                 {
-                    currentNode.Right = new TreeNode(value);
+                    currentNode.Right = new TreeNode(value, currentNode.Height + 1);
                     return;
                 }
 
