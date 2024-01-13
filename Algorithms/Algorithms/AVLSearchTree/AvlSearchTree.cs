@@ -53,10 +53,28 @@ namespace Algorithms.AVLSearchTree
             throw new NotImplementedException();
         }
 
-        public TreeNode FindMinimum()
+        public TreeNode? FindMinimum()
         {
-            // In order | L -> N -> R
-            throw new NotImplementedException();
+            // No order, we just find the L node.
+            return RecursiveFindMinimum(Root);
+        }
+
+        public TreeNode? RecursiveFindMinimum(TreeNode? node)
+        {
+            // If our Root is null, this would be null.
+            if (node == null)
+            {
+                return null;
+            }
+
+            // If there are no more nodes on the left, this node is the lowest one.
+            if (node.Left == null)
+            {
+                return node;
+            }
+
+            // Recursion!!!!
+            return RecursiveFindMinimum(node.Left);
         }
 
         public void Insert(int value)
