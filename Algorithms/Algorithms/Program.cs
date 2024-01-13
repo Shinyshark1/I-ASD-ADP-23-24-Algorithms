@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using Algorithms.AVLSearchTree;
 using Algorithms.BinarySearch.Benchmarks;
 using Algorithms.Deque.Benchmarks;
 using Algorithms.DoublyLinkedList.Benchmarks;
@@ -45,7 +46,7 @@ public class Program
         //Run_HashtableBenchmarks();
 
         //Run_GraphBenchmarks();
-        
+
         //DrawGraphs();
 
         //var graph = new Graph();
@@ -56,6 +57,14 @@ public class Program
         //var deserializedGraphData = JsonConvert.DeserializeObject<GraphData>(JsonConstants.ReadDataSetGraphing()) ?? throw new Exception("Graph data is null");
         //graph.InitiateConnectionList(deserializedGraphData.Verbindingslijst);
         //graph.GetShortestUnweightedPath("0");
+
+        var AvlTree = new AvlSearchTree();
+        AvlTree.Insert(50);
+        AvlTree.Insert(25);
+        AvlTree.Insert(75);
+        AvlTree.Insert(40);
+
+        Console.WriteLine();
     }
 
     private static void DrawGraphs()
