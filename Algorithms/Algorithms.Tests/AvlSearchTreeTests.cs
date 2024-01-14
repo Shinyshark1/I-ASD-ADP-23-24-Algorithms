@@ -90,7 +90,7 @@ namespace Algorithms.Tests
         }
 
         [Fact]
-        public void Insert_SetsTheCorrectHeight()
+        public void Nodes_HaveTheCorrectDepth_AfterBeingInserted()
         {
             // Arrange
             var avlTree = new AvlSearchTree();
@@ -107,10 +107,10 @@ namespace Algorithms.Tests
             var node3 = avlTree.Find(40);
 
             // Assert
-            Assert.Equal(1, rootNode!.Height);
-            Assert.Equal(2, node1!.Height);
-            Assert.Equal(2, node2!.Height);
-            Assert.Equal(3, node3!.Height);
+            Assert.Equal(0, rootNode!.Depth);
+            Assert.Equal(1, node1!.Depth);
+            Assert.Equal(1, node2!.Depth);
+            Assert.Equal(2, node3!.Depth);
         }
 
         [Fact]
@@ -143,21 +143,21 @@ namespace Algorithms.Tests
         public void FindMinimum_FindsTheLowestNode()
         {
             // Arrange
-            var AvlTree = new AvlSearchTree();
-            AvlTree.Insert(50);
-            AvlTree.Insert(25);
-            AvlTree.Insert(75);
-            AvlTree.Insert(40);
-            AvlTree.Insert(90);
-            AvlTree.Insert(104);
-            AvlTree.Insert(23);
-            AvlTree.Insert(7);
-            AvlTree.Insert(3);
-            AvlTree.Insert(80);
-            AvlTree.Insert(64);
+            var avlTree = new AvlSearchTree();
+            avlTree.Insert(50);
+            avlTree.Insert(25);
+            avlTree.Insert(75);
+            avlTree.Insert(40);
+            avlTree.Insert(90);
+            avlTree.Insert(104);
+            avlTree.Insert(23);
+            avlTree.Insert(7);
+            avlTree.Insert(3);
+            avlTree.Insert(80);
+            avlTree.Insert(64);
 
             // Act
-            var lowestNode = AvlTree.FindMinimum();
+            var lowestNode = avlTree.FindMinimum();
 
             // Assert
             Assert.Equal(3, lowestNode.Value);
@@ -167,21 +167,21 @@ namespace Algorithms.Tests
         public void FindMaximum_FindsTheHighestNode()
         {
             // Arrange
-            var AvlTree = new AvlSearchTree();
-            AvlTree.Insert(50);
-            AvlTree.Insert(25);
-            AvlTree.Insert(75);
-            AvlTree.Insert(40);
-            AvlTree.Insert(90);
-            AvlTree.Insert(104);
-            AvlTree.Insert(23);
-            AvlTree.Insert(7);
-            AvlTree.Insert(3);
-            AvlTree.Insert(80);
-            AvlTree.Insert(64);
+            var avlTree = new AvlSearchTree();
+            avlTree.Insert(50);
+            avlTree.Insert(25);
+            avlTree.Insert(75);
+            avlTree.Insert(40);
+            avlTree.Insert(90);
+            avlTree.Insert(104);
+            avlTree.Insert(23);
+            avlTree.Insert(7);
+            avlTree.Insert(3);
+            avlTree.Insert(80);
+            avlTree.Insert(64);
 
             // Act
-            var highestNode = AvlTree.FindMaximum();
+            var highestNode = avlTree.FindMaximum();
 
             // Assert
             Assert.Equal(104, highestNode.Value);
