@@ -3,7 +3,6 @@ using Algorithms.AVLSearchTree.Models;
 
 namespace Algorithms.AVLSearchTree
 {
-    // The height in left and right subtree nodes may be 1 at most, if it becomes 2 we have to rebalance it.
     public class AvlSearchTree
     {
         private TreeNode? _root { get; set; }
@@ -100,41 +99,10 @@ namespace Algorithms.AVLSearchTree
 
         #endregion
 
-        private void BalanceTree(TreeNode newNode)
-        {
-            TreeNode? currentNode = newNode;
-            while (currentNode != null)
-            {
-                if (currentNode.BalanceFactor > 1)
-                {
-                    // LL Case
-                    if (currentNode.Left != null && currentNode.Left.BalanceFactor >= 0)
-                    {
-                        currentNode = RotateRight(currentNode);
-                    }
-                }
-                else if (currentNode.BalanceFactor < -1)
-                {
-                    // RR Case
-                    if (currentNode.Right != null && currentNode.Right.BalanceFactor <= 0)
-                    {
-                        currentNode = RotateLeft(currentNode);
-                    }
-                }
-
-                // A node with no parent must be the root.
-                if (currentNode.Parent == null)
-                {
-                    _root = currentNode;
-                }
-
-                currentNode = currentNode.Parent;
-            }
-        }
+        #region Insert
 
         public void Insert(int value)
         {
-            // TODO: Rotate after mutation
             if (_root == null)
             {
                 _root = new TreeNode(value);
@@ -182,6 +150,8 @@ namespace Algorithms.AVLSearchTree
             }
         }
 
+        #endregion
+
         {
             // TODO: Rotate after mutation
 
@@ -209,6 +179,63 @@ namespace Algorithms.AVLSearchTree
         #endregion
 
         #region Rotations
+
+        private void BalanceTree(TreeNode newNode)
+        {
+            TreeNode? currentNode = newNode;
+            while (currentNode != null)
+            {
+                if (currentNode.BalanceFactor > 1)
+                {
+                    // LL Case
+                    if (currentNode.Left != null && currentNode.Left.BalanceFactor >= 0)
+                    {
+                        currentNode = RotateRight(currentNode);
+                    }
+                    // LR Case
+                    else if (currentNode.Left != null && currentNode.Left.BalanceFactor < 0)
+                    {
+                        currentNode.Left = RotateLeft(currentNode.Left);
+                        currentNode = RotateRight(currentNode);
+
+                        // The double rotation has occured, but left node of the parent might not have been properly updated.
+                        if (currentNode.Parent != null)
+                        {
+                            currentNode.Parent.Left = currentNode;
+                        }
+                    }
+                }
+                else if (currentNode.BalanceFactor < -1)
+                {
+                    // RR Case
+                    if (currentNode.Right != null && currentNode.Right.BalanceFactor <= 0)
+                    {
+                        currentNode = RotateLeft(currentNode);
+                    }
+                    // RL Case
+                    else if (currentNode.Right != null && currentNode.Right.BalanceFactor > 0)
+                    {
+                        currentNode.Right = RotateRight(currentNode.Right);
+                        currentNode = RotateLeft(currentNode);
+
+                        // The double rotation has occured, but right node of the parent might not have been properly updated.
+                        if (currentNode.Parent != null)
+                        {
+                            currentNode.Parent.Right = currentNode;
+                        }
+                    }
+                }
+
+                // A node with no parent must be the current root.
+                if (currentNode.Parent == null)
+                {
+                    _root = currentNode;
+                }
+
+                // We keep the loop going!
+                currentNode = currentNode.Parent;
+            }
+        }
 
         /// <summary>
         /// This is used for LL scenarios.
