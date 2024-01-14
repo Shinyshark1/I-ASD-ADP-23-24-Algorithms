@@ -100,12 +100,45 @@ namespace Algorithms.AVLSearchTree
 
         #endregion
 
+        private void BalanceTree(TreeNode newNode)
+        {
+            TreeNode? currentNode = newNode;
+            while (currentNode != null)
+            {
+                if (currentNode.BalanceFactor > 1)
+                {
+                    // LL Case
+                    if (currentNode.Left != null && currentNode.Left.BalanceFactor >= 0)
+                    {
+                        currentNode = RotateRight(currentNode);
+                    }
+                }
+                else if (currentNode.BalanceFactor < -1)
+                {
+                    // RR Case
+                    if (currentNode.Right != null && currentNode.Right.BalanceFactor <= 0)
+                    {
+                        currentNode = RotateLeft(currentNode);
+                    }
+                }
+
+                // A node with no parent must be the root.
+                if (currentNode.Parent == null)
+                {
+                    _root = currentNode;
+                }
+
+                currentNode = currentNode.Parent;
+            }
+        }
+
         public void Insert(int value)
         {
             // TODO: Rotate after mutation
             if (_root == null)
             {
                 _root = new TreeNode(value);
+                BalanceTree(_root);
                 return;
             }
 
@@ -128,6 +161,7 @@ namespace Algorithms.AVLSearchTree
                 {
                     // the height of this node is the height of the previous node + 1
                     currentNode.Left = new TreeNode(value);
+                    BalanceTree(currentNode.Left);
                     return;
                 }
 
@@ -140,6 +174,7 @@ namespace Algorithms.AVLSearchTree
                 if (currentNode.Right == null)
                 {
                     currentNode.Right = new TreeNode(value);
+                    BalanceTree(currentNode.Right);
                     return;
                 }
 
@@ -167,17 +202,29 @@ namespace Algorithms.AVLSearchTree
             return k1;
         }
 
-        private void RotateLR()
         {
             // 3
         }
 
-        private void RotateRL()
+        #endregion
+
+        #region Rotations
+
+        /// <summary>
+        /// This is used for LL scenarios.
+        /// </summary>
+        private TreeNode RotateRight(TreeNode k2)
         {
-            // 4
+            TreeNode k1 = k2.Left!;
+            k2.Left = k1.Right;
+            k1.Right = k2;
+            return k1;
         }
 
-        private TreeNode RotateRR(TreeNode k2)
+        /// <summary>
+        /// This is used for RR scenarios.
+        /// </summary>
+        private TreeNode RotateLeft(TreeNode k2)
         {
             TreeNode k1 = k2.Right!;
             k2.Right = k1.Left;
