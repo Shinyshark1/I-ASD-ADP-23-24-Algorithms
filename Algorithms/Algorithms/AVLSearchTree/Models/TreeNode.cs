@@ -17,6 +17,7 @@
 
         public int Depth => GetDepth(this);
         public int Height => GetHeight(this);
+        public int BalanceFactor => GetHeight(Left) - GetHeight(Right);
 
         private TreeNode? _left;
         public TreeNode? Left
@@ -27,6 +28,13 @@
                 _left = value;
                 if (_left != null)
                 {
+                    // If our parent is about to become our child we have to swap parents.
+                    if (Parent == _left)
+                    {
+                        var newParent = _left.Parent;
+                        Parent = newParent;
+                    }
+
                     _left.Parent = this;
                 }
             }
@@ -41,6 +49,13 @@
                 _right = value;
                 if (_right != null)
                 {
+                    // If our parent is about to become our child we have to swap parents.
+                    if (Parent == _right)
+                    {
+                        var newParent = _right.Parent;
+                        Parent = newParent;
+                    }
+
                     _right.Parent = this;
                 }
             }
