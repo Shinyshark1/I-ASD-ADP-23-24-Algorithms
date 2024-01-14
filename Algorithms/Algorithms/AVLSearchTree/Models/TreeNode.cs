@@ -61,7 +61,32 @@
             }
         }
 
-        public TreeNode? Parent { get; private set; }
+        private TreeNode? _parent;
+        public TreeNode? Parent
+        {
+            get => _parent;
+            set
+            {
+                _parent = value;
+                if (_parent == null)
+                {
+                    return;
+                }
+
+                // If our parent has neither left nor right as a reference to us, a desync is about to occur.
+                if (_parent.Left != this && _parent.Right != this)
+                {
+                    if (_parent.Value < Value)
+                    {
+                        _parent.Right = this;
+                    }
+                    else
+                    {
+                        _parent.Left = this;
+                    }
+                }
+            }
+        }
 
         private int GetDepth(TreeNode? node)
         {
