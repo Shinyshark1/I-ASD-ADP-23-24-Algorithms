@@ -157,6 +157,14 @@ namespace Algorithms.AVLSearchTree
         private void RotateLL()
         {
             // 1
+        #region Rotations
+
+        private TreeNode RotateLL(TreeNode k2)
+        {
+            TreeNode k1 = k2.Left!;
+            k2.Left = k1.Right;
+            k1.Right = k2;
+            return k1;
         }
 
         private void RotateLR()
@@ -169,9 +177,14 @@ namespace Algorithms.AVLSearchTree
             // 4
         }
 
-        private void RotateRR()
+        private TreeNode RotateRR(TreeNode k2)
         {
-            // 2
+            TreeNode k1 = k2.Right!;
+            k2.Right = k1.Left;
+            k1.Left = k2;
+            return k1;
         }
+
+        #endregion
     }
 }
