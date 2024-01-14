@@ -2,13 +2,12 @@
 {
     public class TreeNode
     {
-        public TreeNode(int value, TreeNode? parent)
+        public TreeNode(int value)
         {
             Key = value;
             Value = value;
             Left = null;
             Right = null;
-            Parent = parent;
         }
 
         // Normally we'd have a key AND a value but we only need to insert ints here.
@@ -19,9 +18,35 @@
         public int Depth => GetDepth(this);
         public int Height => GetHeight(this);
 
-        public TreeNode? Left { get; set; }
-        public TreeNode? Right { get; set; }
-        public TreeNode? Parent { get; set; }
+        private TreeNode? _left;
+        public TreeNode? Left
+        {
+            get => _left;
+            set
+            {
+                _left = value;
+                if (_left != null)
+                {
+                    _left.Parent = this;
+                }
+            }
+        }
+
+        private TreeNode? _right;
+        public TreeNode? Right
+        {
+            get => _right;
+            set
+            {
+                _right = value;
+                if (_right != null)
+                {
+                    _right.Parent = this;
+                }
+            }
+        }
+
+        public TreeNode? Parent { get; private set; }
 
         private int GetDepth(TreeNode? node)
         {

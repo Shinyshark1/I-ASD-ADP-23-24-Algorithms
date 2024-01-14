@@ -6,12 +6,14 @@ namespace Algorithms.AVLSearchTree
     // The height in left and right subtree nodes may be 1 at most, if it becomes 2 we have to rebalance it.
     public class AvlSearchTree
     {
-        private TreeNode? Root { get; set; }
+        private TreeNode? _root { get; set; }
 
         public AvlSearchTree()
         {
-            Root = null;
+            _root = null;
         }
+
+        #region Find Methods
 
         /// <summary>
         /// Attempts to find a node with the specified value using in-order (L -> N -> R) traversal.
@@ -19,7 +21,7 @@ namespace Algorithms.AVLSearchTree
         /// <returns>The <see cref="TreeNode"/> with the specified value or <see langword="null"/> if none can be found.</returns>
         public TreeNode? Find(int value)
         {
-            var node = RecursiveFind(Root, value);
+            var node = RecursiveFind(_root, value);
             return node;
             // In order | L -> N -> R
         }
@@ -47,9 +49,10 @@ namespace Algorithms.AVLSearchTree
             return null;
         }
 
+
         public TreeNode? FindMaximum()
         {
-            return RecursiveFindMaximum(Root);
+            return RecursiveFindMaximum(_root);
         }
 
         public TreeNode? RecursiveFindMaximum(TreeNode? node)
@@ -74,7 +77,7 @@ namespace Algorithms.AVLSearchTree
         public TreeNode? FindMinimum()
         {
             // No order, we just find the L node.
-            return RecursiveFindMinimum(Root);
+            return RecursiveFindMinimum(_root);
         }
 
         public TreeNode? RecursiveFindMinimum(TreeNode? node)
@@ -95,16 +98,18 @@ namespace Algorithms.AVLSearchTree
             return RecursiveFindMinimum(node.Left);
         }
 
+        #endregion
+
         public void Insert(int value)
         {
             // TODO: Rotate after mutation
-            if (Root == null)
+            if (_root == null)
             {
-                Root = new TreeNode(value, 1);
+                _root = new TreeNode(value);
                 return;
             }
 
-            RecursivelyInsertNode(Root, value);
+            RecursivelyInsertNode(_root, value);
         }
 
         private void RecursivelyInsertNode(TreeNode currentNode, int value)
@@ -122,7 +127,7 @@ namespace Algorithms.AVLSearchTree
                 if (currentNode.Left == null)
                 {
                     // the height of this node is the height of the previous node + 1
-                    currentNode.Left = new TreeNode(value, currentNode.Height + 1);
+                    currentNode.Left = new TreeNode(value);
                     return;
                 }
 
@@ -134,7 +139,7 @@ namespace Algorithms.AVLSearchTree
                 // If right is null, we insert here and stop.
                 if (currentNode.Right == null)
                 {
-                    currentNode.Right = new TreeNode(value, currentNode.Height + 1);
+                    currentNode.Right = new TreeNode(value);
                     return;
                 }
 
@@ -142,7 +147,6 @@ namespace Algorithms.AVLSearchTree
             }
         }
 
-        public void Remove(int value)
         {
             // TODO: Rotate after mutation
 
