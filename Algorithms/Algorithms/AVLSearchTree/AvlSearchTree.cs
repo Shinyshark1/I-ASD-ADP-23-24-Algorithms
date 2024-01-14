@@ -179,7 +179,7 @@ namespace Algorithms.AVLSearchTree
             {
                 // TODO: Figure out what we do to remove the root.
                 RemoveRootNode(node);
-                BalanceTree(node);
+                BalanceTree(_root);
                 return true;
             }
 
@@ -203,9 +203,24 @@ namespace Algorithms.AVLSearchTree
             return true;
         }
 
-        private static void RemoveRootNode(TreeNode node)
+        private void RemoveRootNode(TreeNode node)
         {
-            throw new NotImplementedException();
+            switch (node.GetFamilySituation())
+            {
+                case FamilyEnum.NoChildren:
+                    _root = null;
+                    break;
+                case FamilyEnum.OneChild:
+                    var childNode = _root.Left ?? _root.Right;
+                    _root = childNode;
+                    _root.Parent = null;
+                    break;
+                case FamilyEnum.TwoChildren:
+                    RemoveNodeWithTwoChildren(_root);
+                    break;
+                default:
+                    throw new TreeNodeExcessiveFamilyException("Your family tree has grown too large.");
+            }
         }
 
         private static void RemoveChildlessNode(TreeNode node)

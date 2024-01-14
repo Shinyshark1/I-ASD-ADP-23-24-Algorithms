@@ -307,5 +307,56 @@ namespace Algorithms.Tests
             Assert.Equal(29, newConnectingNode.Right.Value);
             Assert.Equal(30, newConnectingNode.Parent.Value);
         }
+
+        [Fact]
+        public void Remove_RemovesRoot_WithNoChildren()
+        {
+            // Arrange
+            var avlTree = new AvlSearchTree();
+            avlTree.Insert(50);
+
+            // Act
+            avlTree.Remove(50);
+
+            // Assert
+            Assert.Null(avlTree.Find(50));
+        }
+
+        [Fact]
+        public void Remove_RemovesRoot_WithOneChild()
+        {
+            // Arrange
+            var avlTree = new AvlSearchTree();
+            avlTree.Insert(50);
+            avlTree.Insert(40);
+
+            // Act
+            avlTree.Remove(50);
+
+            // Assert
+            Assert.Null(avlTree.Find(50));
+            Assert.Null(avlTree.Find(40).Parent);
+            Assert.Equal(40, avlTree.Find(40).Value);
+        }
+
+        [Fact]
+        public void Remove_RemovesRoot_WithTwoChildren()
+        {
+            // Arrange
+            var avlTree = new AvlSearchTree();
+            avlTree.Insert(50);
+            avlTree.Insert(60);
+            avlTree.Insert(40);
+            avlTree.Insert(55);
+
+            // Act
+            avlTree.Remove(50);
+
+            // Assert
+            Assert.Null(avlTree.Find(50));
+            Assert.Null(avlTree.Find(55).Parent);
+            Assert.Equal(40, avlTree.Find(55).Left.Value);
+            Assert.Equal(60, avlTree.Find(55).Right.Value);
+        }
     }
 }
