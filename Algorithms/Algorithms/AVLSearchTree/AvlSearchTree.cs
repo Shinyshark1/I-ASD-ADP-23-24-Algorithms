@@ -48,10 +48,16 @@ namespace Algorithms.AVLSearchTree
             return null;
         }
 
-
-        public TreeNode? FindMaximum()
+        /// <summary>
+        /// Finds the highest valued <see cref="TreeNode"/> in the subtree of the provided <see cref="TreeNode"/>.
+        /// </summary>
+        /// <remarks>
+        /// If no <see cref="TreeNode"/> is provided, the search will begin from the root of the tree.
+        /// </remarks>
+        public TreeNode? FindMaximum(TreeNode? node = null)
         {
-            return RecursiveFindMaximum(_root);
+            node ??= _root;
+            return RecursiveFindMaximum(node);
         }
 
         public TreeNode? RecursiveFindMaximum(TreeNode? node)
@@ -72,11 +78,17 @@ namespace Algorithms.AVLSearchTree
             return RecursiveFindMaximum(node.Right);
         }
 
-
-        public TreeNode? FindMinimum()
+        /// <summary>
+        /// Finds the lowest valued <see cref="TreeNode"/> in the subtree of the provided <see cref="TreeNode"/>.
+        /// </summary>
+        /// <remarks>
+        /// If no <see cref="TreeNode"/> is provided, the search will begin from the root of the tree.
+        /// </remarks>
+        public TreeNode? FindMinimum(TreeNode? node = null)
         {
             // No order, we just find the L node.
-            return RecursiveFindMinimum(_root);
+            node ??= _root;
+            return RecursiveFindMinimum(node);
         }
 
         public TreeNode? RecursiveFindMinimum(TreeNode? node)
@@ -152,28 +164,86 @@ namespace Algorithms.AVLSearchTree
 
         #endregion
 
+        #region Remove
+
+        public bool Remove(int value)
         {
-            // TODO: Rotate after mutation
+            var node = Find(value);
+            if (node == null)
+            {
+                return false;
+            }
+
+            // If there is no parent, we have the root.
+            if (node.Parent == null)
+            {
+                // TODO: Figure out what we do to remove the root.
+                RemoveRootNode(node);
+                BalanceTree(node);
+                return true;
+            }
 
             // Post order | L -> R -> N
+            switch (node.GetFamilySituation())
+            {
+                case FamilyEnum.NoChildren:
+                    RemoveChildlessNode(node);
+                    break;
+                case FamilyEnum.OneChild:
+                    RemoveNodeWithOneChild(node);
+                    break;
+                case FamilyEnum.TwoChildren:
+                    RemoveNodeWithTwoChildren(node);
+                    break;
+                default:
+                    throw new TreeNodeExcessiveFamilyException("Your family tree has grown too large.");
+            }
+
+            BalanceTree(node);
+            return true;
+        }
+
+        private static void RemoveRootNode(TreeNode node)
+        {
             throw new NotImplementedException();
         }
 
-        private void RotateLL()
+        private static void RemoveChildlessNode(TreeNode node)
         {
-            // 1
-        #region Rotations
-
-        private TreeNode RotateLL(TreeNode k2)
-        {
-            TreeNode k1 = k2.Left!;
-            k2.Left = k1.Right;
-            k1.Right = k2;
-            return k1;
+            var parentNode = node.Parent!;
+            if (parentNode.Left?.Value == node.Value)
+            {
+                parentNode.Left = null;
+            }
+            else if (parentNode.Right?.Value == node.Value)
+            {
+                parentNode.Right = null;
+            }
         }
 
+        private static void RemoveNodeWithOneChild(TreeNode node)
         {
-            // 3
+            // We have to link the one child of our node to the parent of our node.
+            if (node.Left != null)
+            {
+                node.Parent!.Left = node.Left;
+            }
+            else if (node.Right != null)
+            {
+                node.Parent!.Right = node.Right;
+            }
+        }
+
+        private void RemoveNodeWithTwoChildren(TreeNode node)
+        {
+            var smallestNode = FindMinimum(node.Right);
+
+            // Swap the values.
+            node.Key = smallestNode.Key;
+            node.Value = smallestNode.Value;
+
+            // Remove the duplicate smallest node.
+            RemoveChildlessNode(smallestNode);
         }
 
         #endregion
@@ -197,12 +267,6 @@ namespace Algorithms.AVLSearchTree
                     {
                         currentNode.Left = RotateLeft(currentNode.Left);
                         currentNode = RotateRight(currentNode);
-
-                        // The double rotation has occured, but left node of the parent might not have been properly updated.
-                        if (currentNode.Parent != null)
-                        {
-                            currentNode.Parent.Left = currentNode;
-                        }
                     }
                 }
                 else if (currentNode.BalanceFactor < -1)
@@ -217,12 +281,6 @@ namespace Algorithms.AVLSearchTree
                     {
                         currentNode.Right = RotateRight(currentNode.Right);
                         currentNode = RotateLeft(currentNode);
-
-                        // The double rotation has occured, but right node of the parent might not have been properly updated.
-                        if (currentNode.Parent != null)
-                        {
-                            currentNode.Parent.Right = currentNode;
-                        }
                     }
                 }
 

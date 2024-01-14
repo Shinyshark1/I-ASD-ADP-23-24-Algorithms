@@ -207,7 +207,7 @@ namespace Algorithms.Tests
             avlTree.Insert(75);
             avlTree.Insert(40);
             avlTree.Insert(90);
-            avlTree.Insert(104);
+            avlTree.Insert(98);
             avlTree.Insert(23);
             avlTree.Insert(7);
             avlTree.Insert(3);
@@ -231,7 +231,7 @@ namespace Algorithms.Tests
             avlTree.Insert(75);
             avlTree.Insert(40);
             avlTree.Insert(90);
-            avlTree.Insert(104);
+            avlTree.Insert(98);
             avlTree.Insert(23);
             avlTree.Insert(7);
             avlTree.Insert(3);
@@ -242,7 +242,70 @@ namespace Algorithms.Tests
             var highestNode = avlTree.FindMaximum();
 
             // Assert
-            Assert.Equal(104, highestNode.Value);
+            Assert.Equal(98, highestNode.Value);
+        }
+
+
+        [Fact]
+        public void Remove_RemovesChildlessNode()
+        {
+            // Arrange
+            var avlTree = new AvlSearchTree();
+            avlTree.Insert(50);
+            avlTree.Insert(40);
+
+            // Act
+            avlTree.Remove(40);
+
+            // Assert
+            Assert.Null(avlTree.Find(40));
+            Assert.Null(avlTree.Find(50).Left);
+        }
+
+        [Fact]
+        public void Remove_RemovesNode_WithOneChild()
+        {
+            // Arrange
+            var avlTree = new AvlSearchTree();
+            avlTree.Insert(50);
+            avlTree.Insert(40);
+            avlTree.Insert(30);
+            avlTree.Insert(20);
+
+            // Act
+            avlTree.Remove(30);
+            var root = avlTree.Find(40);
+
+            // Assert
+            Assert.Null(avlTree.Find(30));
+            Assert.True(root.Left.Value == 20);
+        }
+
+        [Fact]
+        public void Remove_RemovesNode_WithTwoChildren()
+        {
+            // Arrange
+            var avlTree = new AvlSearchTree();
+            avlTree.Insert(50);
+            avlTree.Insert(40);
+            avlTree.Insert(60);
+            avlTree.Insert(30);
+            avlTree.Insert(20);
+            avlTree.Insert(10);
+            avlTree.Insert(29);
+            avlTree.Insert(28);
+
+            // Act
+            avlTree.Remove(20);
+            var root = avlTree.Find(30);
+            var newConnectingNode = root.Left;
+
+            // Assert
+            Assert.Null(avlTree.Find(20));
+            Assert.Equal(28, newConnectingNode.Value);
+            Assert.Equal(10, newConnectingNode.Left.Value);
+            Assert.Equal(29, newConnectingNode.Right.Value);
+            Assert.Equal(30, newConnectingNode.Parent.Value);
         }
     }
 }
