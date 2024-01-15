@@ -1,5 +1,8 @@
 ﻿using Algorithms.AVLSearchTree;
 using Algorithms.AVLSearchTree.Exceptions;
+using Algorithms.JsonData;
+using Algorithms.JsonData.Sorteren.Models;
+using Newtonsoft.Json;
 
 namespace Algorithms.Tests
 {
@@ -8,7 +11,27 @@ namespace Algorithms.Tests
         [Fact]
         public void TheDataSets_Fit_InTheAvlSearchTree()
         {
+            var sortingJson = JsonConstants.ReadDataSetSorting();
 
+            var result1 = Record.Exception(() => new AvlSearchTree(JsonConvert.DeserializeObject<LijstAflopend2>(sortingJson).Content));
+            var result2 = Record.Exception(() => new AvlSearchTree(JsonConvert.DeserializeObject<LijstOplopend2>(sortingJson).Content)); ;
+            var result3 = Record.Exception(() => new AvlSearchTree(JsonConvert.DeserializeObject<LijstGesorteerdAflopend3>(sortingJson).Content));
+            var result4 = Record.Exception(() => new AvlSearchTree(JsonConvert.DeserializeObject<LijstGesorteerdOplopend3>(sortingJson).Content));
+            var result5 = Record.Exception(() => new AvlSearchTree(JsonConvert.DeserializeObject<LijstHerhaald1000>(sortingJson).Content));
+            var result6 = Record.Exception(() => new AvlSearchTree(JsonConvert.DeserializeObject<LijstLeeg0>(sortingJson).Content));
+            var result7 = Record.Exception(() => new AvlSearchTree(JsonConvert.DeserializeObject<LijstOplopend10000>(sortingJson).Content));
+            var result8 = Record.Exception(() => new AvlSearchTree(JsonConvert.DeserializeObject<LijstWillekeurig10000>(sortingJson).Content));
+            var result9 = Record.Exception(() => new AvlSearchTree(JsonConvert.DeserializeObject<LijstWillekeurig3>(sortingJson).Content));
+
+            Assert.Null(result1);
+            Assert.Null(result2);
+            Assert.Null(result3);
+            Assert.IsType<DuplicateTreeNodeKeyException>(result4);
+            Assert.IsType<DuplicateTreeNodeKeyException>(result5);
+            Assert.Null(result6);
+            Assert.Null(result7);
+            Assert.Null(result8);
+            Assert.Null(result9);
         }
 
         [Fact]

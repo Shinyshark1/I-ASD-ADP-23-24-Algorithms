@@ -12,6 +12,15 @@ namespace Algorithms.AVLSearchTree
             _root = null;
         }
 
+        public AvlSearchTree(IEnumerable<int> values)
+        {
+            _root = null;
+            foreach (var item in values)
+            {
+                Insert(item);
+            }
+        }
+
         #region Find Methods
 
         /// <summary>
