@@ -1,6 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using Algorithms.AVLSearchTree;
+using Algorithms.AVLSearchTree.Benchmarks;
 using Algorithms.BinarySearch.Benchmarks;
 using Algorithms.Deque.Benchmarks;
 using Algorithms.DoublyLinkedList.Benchmarks;
@@ -47,6 +47,8 @@ public class Program
 
         //Run_GraphBenchmarks();
 
+        Run_AvlSearchTreeBenchmarks();
+
         //DrawGraphs();
 
         //var graph = new Graph();
@@ -57,14 +59,6 @@ public class Program
         //var deserializedGraphData = JsonConvert.DeserializeObject<GraphData>(JsonConstants.ReadDataSetGraphing()) ?? throw new Exception("Graph data is null");
         //graph.InitiateConnectionList(deserializedGraphData.Verbindingslijst);
         //graph.GetShortestUnweightedPath("0");
-
-        var AvlTree = new AvlSearchTree();
-        AvlTree.Insert(50);
-        AvlTree.Insert(25);
-        AvlTree.Insert(75);
-        AvlTree.Insert(40);
-
-        Console.WriteLine();
     }
 
     private static void DrawGraphs()
@@ -549,6 +543,54 @@ public class Program
         foreach (int value in benchmarkValues)
         {
             GraphBenchmarks.GetShortestWeightedPath_Benchmark(value);
+            Console.WriteLine();
+        }
+    }
+
+    private static void Run_AvlSearchTreeBenchmarks()
+    {
+        // 100000 = 0.0027023
+        var benchmarkValues = new List<int> { 10, 100, 1000, 10000, 100000 };
+        BenchmarkHelper.StartBenchmark("Find");
+        foreach (int value in benchmarkValues)
+        {
+            AvlSearchTreeBenchmarks.Find_Benchmark(value);
+            Console.WriteLine();
+        }
+
+        // 100000 = 0.0000006
+        benchmarkValues = new List<int> { 10, 100, 1000, 10000, 100000 };
+        BenchmarkHelper.StartBenchmark("FindMinimum");
+        foreach (int value in benchmarkValues)
+        {
+            AvlSearchTreeBenchmarks.FindMinimum_Benchmark(value);
+            Console.WriteLine();
+        }
+
+        // 100000 = 0.0000010
+        benchmarkValues = new List<int> { 10, 100, 1000, 10000, 100000 };
+        BenchmarkHelper.StartBenchmark("FindMaximum");
+        foreach (int value in benchmarkValues)
+        {
+            AvlSearchTreeBenchmarks.FindMaximum_Benchmark(value);
+            Console.WriteLine();
+        }
+
+        // 100000 = 59.4373239 seconds
+        benchmarkValues = new List<int> { 10, 100, 1000, 10000, 100000 };
+        BenchmarkHelper.StartBenchmark("Insert");
+        foreach (int value in benchmarkValues)
+        {
+            AvlSearchTreeBenchmarks.Insert_Benchmark(value);
+            Console.WriteLine();
+        }
+
+        // 100000 = 27.1499847
+        benchmarkValues = new List<int> { 10, 100, 1000, 10000, 100000 };
+        BenchmarkHelper.StartBenchmark("Remove");
+        foreach (int value in benchmarkValues)
+        {
+            AvlSearchTreeBenchmarks.Remove_Benchmark(value);
             Console.WriteLine();
         }
     }
