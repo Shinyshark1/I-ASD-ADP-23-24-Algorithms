@@ -7,6 +7,8 @@ namespace Algorithms.AVLSearchTree
     {
         private TreeNode? _root { get; set; }
 
+        public int Height => _root?.Height ?? 0;
+
         public AvlSearchTree()
         {
             _root = null;
