@@ -33,14 +33,14 @@ namespace Algorithms.Tests
 
             // Assert - 40 became the new root.
             Assert.Null(root.Parent);
-            Assert.Equal(40, root.Value);
+            Assert.Equal(40, root.Key);
 
-            Assert.Equal(30, root.Left.Value);
-            Assert.Equal(20, root.Left.Left.Value);
+            Assert.Equal(30, root.Left.Key);
+            Assert.Equal(20, root.Left.Left.Key);
 
-            Assert.Equal(50, root.Right.Value);
-            Assert.Equal(45, root.Right.Left.Value);
-            Assert.Equal(60, root.Right.Right.Value);
+            Assert.Equal(50, root.Right.Key);
+            Assert.Equal(45, root.Right.Left.Key);
+            Assert.Equal(60, root.Right.Right.Key);
         }
 
         [Fact]
@@ -65,14 +65,14 @@ namespace Algorithms.Tests
 
             // Assert - 60 became the new root.
             Assert.Null(root.Parent);
-            Assert.Equal(60, root.Value);
+            Assert.Equal(60, root.Key);
 
-            Assert.Equal(50, root.Left.Value);
-            Assert.Equal(55, root.Left.Right.Value);
-            Assert.Equal(40, root.Left.Left.Value);
+            Assert.Equal(50, root.Left.Key);
+            Assert.Equal(55, root.Left.Right.Key);
+            Assert.Equal(40, root.Left.Left.Key);
 
-            Assert.Equal(70, root.Right.Value);
-            Assert.Equal(80, root.Right.Right.Value);
+            Assert.Equal(70, root.Right.Key);
+            Assert.Equal(80, root.Right.Right.Key);
         }
 
         [Fact]
@@ -95,12 +95,12 @@ namespace Algorithms.Tests
 
             // Assert - 50 became the new root.
             Assert.Null(root.Parent);
-            Assert.Equal(50, root.Value);
-            Assert.Equal(60, root.Right.Value);
+            Assert.Equal(50, root.Key);
+            Assert.Equal(60, root.Right.Key);
 
-            Assert.Equal(35, root.Left.Value);
-            Assert.Equal(30, root.Left.Left.Value);
-            Assert.Equal(40, root.Left.Right.Value);
+            Assert.Equal(35, root.Left.Key);
+            Assert.Equal(30, root.Left.Left.Key);
+            Assert.Equal(40, root.Left.Right.Key);
         }
 
         [Fact]
@@ -124,13 +124,13 @@ namespace Algorithms.Tests
 
             // Assert - 50 became the new root.
             Assert.Null(root.Parent);
-            Assert.Equal(55, root.Value);
-            Assert.Equal(50, root.Left.Value);
-            Assert.Equal(40, root.Left.Left.Value);
+            Assert.Equal(55, root.Key);
+            Assert.Equal(50, root.Left.Key);
+            Assert.Equal(40, root.Left.Left.Key);
 
-            Assert.Equal(60, root.Right.Value);
-            Assert.Equal(56, root.Right.Left.Value);
-            Assert.Equal(70, root.Right.Right.Value);
+            Assert.Equal(60, root.Right.Key);
+            Assert.Equal(56, root.Right.Left.Key);
+            Assert.Equal(70, root.Right.Right.Key);
         }
 
         [Fact]
@@ -190,10 +190,10 @@ namespace Algorithms.Tests
             var nullNode = avlTree.Find(10);
 
             // Assert
-            Assert.Equal(50, rootNode!.Value);
-            Assert.Equal(25, node1!.Value);
-            Assert.Equal(75, node2!.Value);
-            Assert.Equal(40, node3!.Value);
+            Assert.Equal(50, rootNode!.Key);
+            Assert.Equal(25, node1!.Key);
+            Assert.Equal(75, node2!.Key);
+            Assert.Equal(40, node3!.Key);
             Assert.Null(nullNode);
         }
 
@@ -218,7 +218,7 @@ namespace Algorithms.Tests
             var lowestNode = avlTree.FindMinimum();
 
             // Assert
-            Assert.Equal(3, lowestNode.Value);
+            Assert.Equal(3, lowestNode.Key);
         }
 
         [Fact]
@@ -242,7 +242,7 @@ namespace Algorithms.Tests
             var highestNode = avlTree.FindMaximum();
 
             // Assert
-            Assert.Equal(98, highestNode.Value);
+            Assert.Equal(98, highestNode.Key);
         }
 
 
@@ -278,7 +278,7 @@ namespace Algorithms.Tests
 
             // Assert
             Assert.Null(avlTree.Find(30));
-            Assert.True(root.Left.Value == 20);
+            Assert.True(root.Left.Key == 20);
         }
 
         [Fact]
@@ -302,10 +302,10 @@ namespace Algorithms.Tests
 
             // Assert
             Assert.Null(avlTree.Find(20));
-            Assert.Equal(28, newConnectingNode.Value);
-            Assert.Equal(10, newConnectingNode.Left.Value);
-            Assert.Equal(29, newConnectingNode.Right.Value);
-            Assert.Equal(30, newConnectingNode.Parent.Value);
+            Assert.Equal(28, newConnectingNode.Key);
+            Assert.Equal(10, newConnectingNode.Left.Key);
+            Assert.Equal(29, newConnectingNode.Right.Key);
+            Assert.Equal(30, newConnectingNode.Parent.Key);
         }
 
         [Fact]
@@ -336,7 +336,7 @@ namespace Algorithms.Tests
             // Assert
             Assert.Null(avlTree.Find(50));
             Assert.Null(avlTree.Find(40).Parent);
-            Assert.Equal(40, avlTree.Find(40).Value);
+            Assert.Equal(40, avlTree.Find(40).Key);
         }
 
         [Fact]
@@ -355,8 +355,8 @@ namespace Algorithms.Tests
             // Assert
             Assert.Null(avlTree.Find(50));
             Assert.Null(avlTree.Find(55).Parent);
-            Assert.Equal(40, avlTree.Find(55).Left.Value);
-            Assert.Equal(60, avlTree.Find(55).Right.Value);
+            Assert.Equal(40, avlTree.Find(55).Left.Key);
+            Assert.Equal(60, avlTree.Find(55).Right.Key);
         }
     }
 }

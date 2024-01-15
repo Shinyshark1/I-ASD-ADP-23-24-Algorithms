@@ -18,30 +18,30 @@ namespace Algorithms.AVLSearchTree
         /// Attempts to find a node with the specified value using in-order (L -> N -> R) traversal.
         /// </summary>
         /// <returns>The <see cref="TreeNode"/> with the specified value or <see langword="null"/> if none can be found.</returns>
-        public TreeNode? Find(int value)
+        public TreeNode? Find(int key)
         {
-            var node = RecursiveFind(_root, value);
+            var node = RecursiveFind(_root, key);
             return node;
             // In order | L -> N -> R
         }
 
-        private TreeNode? RecursiveFind(TreeNode? currentNode, int value)
+        private TreeNode? RecursiveFind(TreeNode? currentNode, int key)
         {
             if (currentNode == null)
             {
                 return null;
             }
-            else if (value < currentNode.Value) //L
+            else if (key < currentNode.Key) //L
             {
-                return RecursiveFind(currentNode.Left, value);
+                return RecursiveFind(currentNode.Left, key);
             }
-            else if (currentNode.Value == value) //N
+            else if (currentNode.Key == key) //N
             {
                 return currentNode;
             }
-            else if (value > currentNode.Value) //R
+            else if (key > currentNode.Key) //R
             {
-                return RecursiveFind(currentNode.Right, value);
+                return RecursiveFind(currentNode.Right, key);
             }
 
             // This is unreachable as all cases are covered, but I prefer not to use else to assume the right hand side for clarity of code.
@@ -125,40 +125,40 @@ namespace Algorithms.AVLSearchTree
             RecursivelyInsertNode(_root, value);
         }
 
-        private void RecursivelyInsertNode(TreeNode currentNode, int value)
+        private void RecursivelyInsertNode(TreeNode currentNode, int key)
         {
             // We cannot insert duplicate values for our tree.
-            if (currentNode.Value == value)
+            if (currentNode.Key == key)
             {
-                throw new DuplicateTreeNodeKeyException($"A duplicate value is not allowed, offending value: '{value}'");
+                throw new DuplicateTreeNodeKeyException($"A duplicate key is not allowed, offending value: '{key}'");
             }
 
             // If the value is smaller than our value, we move to the left.
-            if (value < currentNode.Value)
+            if (key < currentNode.Key)
             {
                 // If left is null, we insert here and stop.
                 if (currentNode.Left == null)
                 {
                     // the height of this node is the height of the previous node + 1
-                    currentNode.Left = new TreeNode(value);
+                    currentNode.Left = new TreeNode(key);
                     BalanceTree(currentNode.Left);
                     return;
                 }
 
-                RecursivelyInsertNode(currentNode.Left, value);
+                RecursivelyInsertNode(currentNode.Left, key);
             }
             // If the value is larger than our value, we move to the right.
-            else if (value > currentNode.Value)
+            else if (key > currentNode.Key)
             {
                 // If right is null, we insert here and stop.
                 if (currentNode.Right == null)
                 {
-                    currentNode.Right = new TreeNode(value);
+                    currentNode.Right = new TreeNode(key);
                     BalanceTree(currentNode.Right);
                     return;
                 }
 
-                RecursivelyInsertNode(currentNode.Right, value);
+                RecursivelyInsertNode(currentNode.Right, key);
             }
         }
 
@@ -226,11 +226,11 @@ namespace Algorithms.AVLSearchTree
         private static void RemoveChildlessNode(TreeNode node)
         {
             var parentNode = node.Parent!;
-            if (parentNode.Left?.Value == node.Value)
+            if (parentNode.Left?.Key == node.Key)
             {
                 parentNode.Left = null;
             }
-            else if (parentNode.Right?.Value == node.Value)
+            else if (parentNode.Right?.Key == node.Key)
             {
                 parentNode.Right = null;
             }
