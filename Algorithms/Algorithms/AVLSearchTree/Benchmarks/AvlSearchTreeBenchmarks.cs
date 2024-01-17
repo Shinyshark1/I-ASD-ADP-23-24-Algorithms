@@ -61,7 +61,6 @@ namespace Algorithms.AVLSearchTree.Benchmarks
             Console.WriteLine($"Size: {size} - Elapsed time: {sw.Elapsed}");
         }
 
-        // Insert
         public static void Insert_Benchmark(int size)
         {
             var avlSearchTree = new AvlSearchTree();
@@ -78,7 +77,6 @@ namespace Algorithms.AVLSearchTree.Benchmarks
             Console.WriteLine($"Size: {size} - Elapsed time: {sw.Elapsed}");
         }
 
-        // Remove
         public static void Remove_Benchmark(int size)
         {
             var avlSearchTree = new AvlSearchTree();

@@ -23,13 +23,13 @@ namespace Algorithms.Graphs
             Queue<Vertex> queue = new Queue<Vertex>();
             queue.Enqueue(startingVertex);
 
-            while(queue.Count > 0)
+            while (queue.Count > 0)
             {
                 var vertex = queue.Dequeue();
                 foreach (var edge in vertex.Edges)
                 {
                     var destinationVertex = edge.SecondVertex;
-                    if(destinationVertex.Distance == double.PositiveInfinity)
+                    if (destinationVertex.Distance == double.PositiveInfinity)
                     {
                         destinationVertex.Distance = vertex.Distance + 1;
                         destinationVertex.PreviousVertex = vertex;
@@ -48,14 +48,13 @@ namespace Algorithms.Graphs
                 throw new InvalidOperationException($"Vertex '{sourceVertexName}' does not exist in the Graph.");
             }
 
-            if(_vertexDictionary.Values.SelectMany(x => x.Edges).Any(e => e.Cost < 0))
+            if (_vertexDictionary.Values.SelectMany(x => x.Edges).Any(e => e.Cost < 0))
             {
                 throw new Exception("The Dijkstra algorithm does not support negative costs between nodes.");
             }
 
             ResetVertexDictionary();
 
-            // We set our starting vertex from infinity to 0 so that we can begin.
             var startingVertex = _vertexDictionary[sourceVertexName];
             startingVertex.Distance = 0;
 
@@ -68,7 +67,6 @@ namespace Algorithms.Graphs
                 var currentVertex = priorityQueue.Dequeue();
                 foreach (var edge in currentVertex.Edges.OrderBy(x => x.Cost))
                 {
-                    // If we already visited this edge, we should skip it.
                     if (visitedVertices.Contains(edge.SecondVertex.Name))
                     {
                         continue;
@@ -85,8 +83,6 @@ namespace Algorithms.Graphs
 
                 visitedVertices.Add(currentVertex.Name);
 
-                // We have to find the next unvisited vertex with the lowest distance.
-                // That vertex has to be queued up for our next operation.
                 var nextItem = _vertexDictionary.Values
                     .Where(x => visitedVertices.Contains(x.Name) == false)
                     .OrderBy(x => x.Distance)
@@ -111,19 +107,11 @@ namespace Algorithms.Graphs
             return vertex;
         }
 
-        /// <summary>
-        /// Adds the provided vertex to the <see cref="Graph"/>.
-        /// </summary>
-        /// <exception cref="InvalidOperationException">Thrown when a vertex with the same name already exists in the graph.</exception>
         public void AddVertex(string vertexName)
         {
             AddVertex(new Vertex(vertexName));
         }
 
-        /// <summary>
-        /// Adds the provided vertex to the <see cref="Graph"/>.
-        /// </summary>
-        /// <exception cref="InvalidOperationException">Thrown when a vertex with the same name already exists in the graph.</exception>
         public void AddVertex(Vertex vertex)
         {
             if (_vertexDictionary.ContainsKey(vertex.Name))
@@ -134,20 +122,11 @@ namespace Algorithms.Graphs
             _vertexDictionary.Add(vertex.Name, vertex);
         }
 
-
-        /// <summary>
-        /// Removes all the edges to the provided vertex and removes it from the Graph.
-        /// </summary>
-        /// <exception cref="InvalidOperationException">Thrown when no vertex of the provided name exists in the graph.</exception>
         public void RemoveVertex(string vertexName)
         {
             RemoveVertex(new Vertex(vertexName));
         }
 
-        /// <summary>
-        /// Removes all the edges to the provided vertex and removes it from the Graph.
-        /// </summary>
-        /// <exception cref="InvalidOperationException">Thrown when no vertex of the provided name exists in the graph.</exception>
         public void RemoveVertex(Vertex vertex)
         {
             if (_vertexDictionary.ContainsKey(vertex.Name) == false)
@@ -163,10 +142,6 @@ namespace Algorithms.Graphs
             _vertexDictionary.Remove(vertex.Name);
         }
 
-        /// <summary>
-        /// Links the first vertex to the second vertex with the provided cost.
-        /// </summary>
-        /// <exception cref="InvalidOperationException">Thrown when a link between the two provided vertices already exists in the graph.</exception>
         public void AddEdge(Vertex firstVertex, Vertex secondVertex, double cost)
         {
             var existingEdge = firstVertex.Edges.FirstOrDefault(x => x.SecondVertex.Equals(secondVertex));
@@ -178,12 +153,6 @@ namespace Algorithms.Graphs
             firstVertex.Edges.AddLast(new Edge(secondVertex, cost));
         }
 
-        /// <summary>
-        /// Unlinks the first vertex from the second vertex.
-        /// The first vertex will not be removed if it no longer has any edges, 
-        /// use <see cref="RemoveVertex(Vertex)"/> or <see cref="RemoveVertex(string)"/> instead.
-        /// </summary>
-        /// <returns>True if removing was succesful, false if it wasn't.</returns>
         public bool RemoveEdge(string firstVertexName, string secondVertexName)
         {
             var firstVertex = _vertexDictionary[firstVertexName];
@@ -305,7 +274,6 @@ namespace Algorithms.Graphs
                 Console.WriteLine(sb.ToString());
             }
 
-            // New line for the next possible drawing.
             Console.WriteLine();
         }
 

@@ -10,8 +10,6 @@
             Right = null;
         }
 
-        // Normally we'd have a key AND a value but we only need to insert ints here.
-        // For the sake of simplicity, we treat the key AND the value as seperate entities in-case we'd ever want to implement <T>
         public int Key { get; set; }
         public int Value { get; set; }
 
@@ -28,7 +26,6 @@
                 _left = value;
                 if (_left != null)
                 {
-                    // If our parent is about to become our child we have to swap parents.
                     if (Parent == _left)
                     {
                         var newParent = _left.Parent;
@@ -49,7 +46,6 @@
                 _right = value;
                 if (_right != null)
                 {
-                    // If our parent is about to become our child we have to swap parents.
                     if (Parent == _right)
                     {
                         var newParent = _right.Parent;
@@ -73,7 +69,6 @@
                     return;
                 }
 
-                // If our parent has neither left nor right as a reference to us, a desync is about to occur.
                 if (_parent.Left != this && _parent.Right != this)
                 {
                     if (_parent.Key < Key)
@@ -90,7 +85,6 @@
 
         private int GetDepth(TreeNode? node)
         {
-            // We start at -1 so that our root stays at the conventional 0.
             int depth = -1;
             while (node != null)
             {

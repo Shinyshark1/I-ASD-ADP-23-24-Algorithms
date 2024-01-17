@@ -47,9 +47,9 @@ public class Program
 
         //Run_GraphBenchmarks();
 
-        Run_AvlSearchTreeBenchmarks();
+        //Run_AvlSearchTreeBenchmarks();
 
-        //DrawGraphs();
+        DrawGraphs();
 
         //var graph = new Graph();
         //graph.InitiateConnectionList(JsonConvert.DeserializeObject<int[][][]>(JsonConstants.WeightedLineList) ?? throw new Exception());
